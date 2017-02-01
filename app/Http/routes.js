@@ -16,5 +16,15 @@
 */
 
 const Route = use('Route')
-
-Route.on('/').render('welcome')
+Route.get('/', 'HomeController.index')
+Route.post('/login', 'LoginController.login')
+Route.get('/login', 'LoginController.index')
+Route.get('/logout', 'RegisterController.doLogout')
+Route.get('/register', 'RegisterController.index')
+Route.post('register', 'RegisterController.doRegister')
+Route.get('/products/:id', 'ProductController.show')
+Route.get('/dashboard/:id', 'ProfileController.show').as('profile')
+Route.post('/dashboard/:id', 'ProfileController.store')
+Route.get('/products', 'ProductController.index')
+Route.get('products/:id/images/create', 'ImageController.create')
+Route.post('products/:id/images', 'ImageController.store')

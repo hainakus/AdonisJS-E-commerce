@@ -1,0 +1,59 @@
+{% set user = currentUser %}
+{% if user %}
+{% yield profile = user.profile().fetch() %}
+{% endif %}
+
+<div id="wrapper">
+
+    <div id="sidebar-wrapper">
+            <ul class="sidebar-nav" style="margin-left:0;">
+                <li class="sidebar-brand">
+                    
+                        <a href="#menu-toggle"  id="menu-toggle" style="margin-top:20px;float:right;" > <i class="fa fa-bars " style="font-size:20px !Important;" aria-hidden="true" aria-hidden="true"></i> 
+                    
+                </li>
+                {% if not user %}
+                        <li><a href="/login">Login</a></li>
+                        <li><a href="/register">Register</a></li>
+                        
+                    {% elif user and profile %}
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                                {{ user.username }} <span class="caret"><img src="/uploads/{{profile.avatar}}" style="height:38px; width:38px;border-radius: 50px;" class="img-responsive"></span>
+                            </a>
+
+                            <ul class="dropdown-menu" role="menu">
+                            <li>{{ linkTo('profile', 'View Profile', { id: user.id }) }}</li>
+                                <li><a href="/logout"><i class="fa fa-btn fa-sign-out"></i>Logout</a></li>
+                            </ul>
+                        </li>
+                    {% else %}
+                    <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                                {{ user.username }} <span class="caret"></span>
+                            </a>
+
+                            <ul class="dropdown-menu" role="menu">
+                            <li>{{ linkTo('profile', 'View Profile', { id: user.id }) }}</li>
+                                <li><a href="/logout"><i class="fa fa-btn fa-sign-out"></i>Logout</a></li>
+                            </ul>
+                        </li>
+                    {% endif %}
+                <li>
+                    <a href="/"> <i class="fa fa-play-circle-o " aria-hidden="true"> </i> <span style="margin-left:10px;"> Home</span> </a>
+                </li>
+                <li>
+                    <a href="#"> <i class="fa fa-puzzle-piece" aria-hidden="true"> </i> <span style="margin-left:10px;"> Section</span> </a>
+                </li>
+                <li>
+                    <a href="#"> <i class="fa fa-font" aria-hidden="true"> </i> <span style="margin-left:10px;"> Section</span> </a>
+                </li>
+                <li>
+                    <a href="#"><i class="fa fa-info-circle " aria-hidden="true"> </i> <span style="margin-left:10px;">Section </span> </a>
+                </li>
+                <li>
+                    <a href="#"> <i class="fa fa-comment-o" aria-hidden="true"> </i> <span style="margin-left:10px;"> Section</span> </a>
+                </li>
+            </ul>
+        </div>
+        <!-- /#sidebar-wrapper -->

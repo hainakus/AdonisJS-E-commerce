@@ -21,10 +21,11 @@ const Factory = use('Factory')
 | this blueprint inside your seeds to generate dummy data.
 |
 */
-Factory.blueprint('App/Model/User', (fake) => {
+Factory.blueprint('App/Model/Product', (fake) => {
   return {
-    username: fake.username(),
-    email: fake.email(),
-    password: fake.password()
+    title: fake.sentence(),
+    description: fake.paragraph(),
+    price: fake.integer({min: 0, max: 200}),
+    SKU: fake.integer({min: 0, max: 20})
   }
 })

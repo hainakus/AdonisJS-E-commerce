@@ -1,10 +1,64 @@
 {% extends 'master' %}
-
+{% set Product = use('App/Model/Product') %}
 {% block content %}
-  <div class="__banner">
-    <div class="banner__inner">
-      <img src="/assets/logo.svg">
-      <h2>Practical <span>Reliable</span> Productive</h2>
-    </div>
-  </div>
+{% if currentUser %}
+
+<div class="container">
+			<ul>
+   <!-- For filtering controls add -->
+   <li data-filter="all"> All items </li>
+   <li data-filter="1"> Category 1 </li>
+   <li data-filter="2"> Category 2 </li>
+   <li data-filter="3"> Category 3 </li>
+   <!-- For a shuffle control add -->
+   <li data-shuffle> Shuffle items </li>
+   <!-- For sorting controls add -->
+   <li data-sortAsc> Ascending </li>
+   <li data-sortDesc> Descending </li>
+</ul>
+<!-- To choose the value by which you want to sort add -->
+<select data-sortOrder>
+   <option value="domIndex"> Position </option>
+   <option value="sortData"> Custom Data </option>
+</select>
+	<div class="filtr-container">
+		{% for product in products %}
+		{% yield productImage = Product.find(product.id) %}
+		{% yield image = productImage.images().first() %}
+
+	    <div class="filtr-item col-md-4" data-category="{{ [1,2,3,4,5,6,7,8,9] | random }}" data-sort="value">
+			<a href="/products/{{product.id}}"><h1>{{product.title}}</h1></a>
+			{% if image == null %}
+				<img src="/uploads/1485839828415.png"  class="img-responsive" alt="sample">
+			{% else %}
+			 
+			 <img src="/uploads/{{image.src}}"  class="img-responsive" alt="sample">
+			{% endif %}
+			<p>{{product.price}}</p>
+	    </div>
+		{% endfor %}
+	</div>
+</div>
+{% endif %}  
+{% endblock %}
+{% block scripts %}
+{{super()}}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/filterizr/1.2.3/jquery.filterizr.js"></script>
+<script>
+	$(function() {
+            //Initialize filterizr with default options
+            $('.filtr-container').filterizr('setOptions', {layout: 'sameSize'});
+        });
+    $(".slider").vegas({
+    slides: [
+	{% for image in images %}
+        { src: "/uploads/{{image.avatar}}" },
+	{% endfor %}
+      
+        { src: "/uploads/1485839828415.png" }
+    ],
+     overlay: 'assets/02.png'
+});
+    </script>
+  
 {% endblock %}

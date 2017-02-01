@@ -1,0 +1,29 @@
+{% extends 'master' %}
+
+
+{% block content %}
+{{product|json}}
+<div class="container">
+{{ form.open({{url: '/products' product.id '/images', method: 'POST'}) }}
+
+    {{ csrfField }}
+
+
+     <div class="fileinput fileinput-new" data-provides="fileinput">
+  <div class="fileinput-new thumbnail" style="width: 600px; height: 450px;">
+    <img data-src="holder.js/100%x100%" alt="">
+  </div>
+  <div class="fileinput-preview fileinput-exists thumbnail" style="max-width: 600px; max-height: 450px;"></div>
+  <div>
+    <span class="btn btn-default btn-file"><span class="fileinput-new">Select image</span><span class="fileinput-exists">Change</span><input type="file" name="imagem"></span>
+    <a href="#" class="btn btn-default fileinput-exists" data-dismiss="fileinput">Remove</a>
+  </div>
+</div>
+    
+    {{ form.submit('Publish', 'publish', { class: 'btn btn-primary btn-block' }) }}
+{{ form.close()}}
+
+
+</div>
+
+{% endblock %}
