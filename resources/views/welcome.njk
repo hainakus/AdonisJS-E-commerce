@@ -27,14 +27,16 @@
 		{% yield image = productImage.images().first() %}
 
 	    <div class="filtr-item col-md-4" data-category="{{ [1,2,3,4,5,6,7,8,9] | random }}" data-sort="value">
-			<a href="/products/{{product.id}}"><h1>{{product.title}}</h1></a>
+			<a href="/products/{{product.id}}"><h1>{{product.title}}</h1>
 			{% if image == null %}
 				<img src="/uploads/1485839828415.png"  class="img-responsive" alt="sample">
 			{% else %}
 			 
 			 <img src="/uploads/{{image.src}}"  class="img-responsive" alt="sample">
 			{% endif %}
+			</a>
 			<p>{{product.price}}</p>
+			<p>{{product.id}}</p>
 	    </div>
 		{% endfor %}
 	</div>
@@ -47,7 +49,7 @@
 <script>
 	$(function() {
             //Initialize filterizr with default options
-            $('.filtr-container').filterizr('setOptions', {layout: 'sameSize'});
+            $('.filtr-container').filterizr('setOptions', {layout: 'packed'});
         });
     $(".slider").vegas({
     slides: [

@@ -5,6 +5,11 @@ const Profile = use('App/Model/Profile')
 const Product = use('App/Model/Product')
 const Helpers = use('Helpers')
 class ImageController {
+    * show (request,response){
+        const id = request.param('id');
+         const product = yield Product.with().where({ id }).firstOrFail();
+        yield response.sendView('product.show')
+    }
     * create(request,response){
         const id = request.param('id');
          const product = yield Product.with().where({ id }).firstOrFail();
@@ -24,18 +29,19 @@ class ImageController {
                 
                 return
             }
-           const image = new Image()
-            image.src = fileName, 
-            image.product_id = product.id
-            
-            product.images().create(image) 
+         const data = {
+               src: fileName
+           }
+            yield product.images().create(data) 
         }
-         yield response.sendView('image.create')
+         response.redirect('back')
     }
     * destroy (request,response){
-        image = yield Image.findOrFail(request.param('id'))
-        image.destroy()
-        return
+       const id = request.param('id');
+
+    const image = yield Image.query().where({ id }).firstOrFail();
+    yield image.product().detach();
+        response.redirect('back')
     }
 }
 

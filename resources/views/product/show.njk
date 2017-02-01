@@ -1,70 +1,29 @@
 {% extends 'master' %}
 {% set Product = use('App/Model/Product') %}
 {% block content %}
-{{product|json}}
-{% yield productImage = Product.find(product.id) %}
-{% yield image = productImage.images().first() %}
-<div class="container-fluid">
-<div class="main main-raised main-product" style="top:18em;">
-                <div class="row">
-                    <div class="col-md-6 col-sm-6">
 
-                       <div class="tab-content">
-                       <a href="/products/{{product.id}}/images/create">Create Images into product</a> {# admin role #}
-                            <div class="tab-pane" id="product-page1">
-                                 <img src="../assets/img/examples/product1.jpg">
-                              </div>
-                              <div class="tab-pane active" id="product-page2">
-                                  <img src="../assets/img/examples/product2.jpg">
-                             </div>
-                              <div class="tab-pane" id="product-page3">
-                                  <img src="../assets/img/examples/product3.jpg">
-                              </div>
-                              <div class="tab-pane" id="product-page4">
-                                  <img src="../assets/img/examples/product4.jpg">
-                              </div>
+{% yield productImage = Product.find(product.id) %}
+
+{% yield image = productImage.images().first() %}
+
+<div class="container-fluid">
+<div class="row text-right">
+                            <button class="btn btn-rose btn-round">Cart &nbsp;<i class="material-icons">shopping_cart</i></button>
                         </div>
-                        <div class="nbs-flexisel-container"><div class="nbs-flexisel-inner"><ul class="nav flexi-nav nbs-flexisel-ul" role="tablist" id="flexiselDemo1" style="left: -128.75px;">
-							<li class="nbs-flexisel-item" style="width: 128.75px;">
-								<a href="#product-page4" role="tab" data-toggle="tab" aria-expanded="true">
-									<img src="../assets/img/examples/product4.jpg">
-								</a>
-							</li><li class="nbs-flexisel-item" style="width: 128.75px;">
-								<a href="#product-page1" role="tab" data-toggle="tab" aria-expanded="false">
-									<img src="../assets/img/examples/product1.jpg">
-								</a>
-							</li>
-							<li class="active nbs-flexisel-item" style="width: 128.75px;">
-								<a href="#product-page2" role="tab" data-toggle="tab" aria-expanded="false">
-									<img src="../assets/img/examples/product2.jpg">
-								</a>
-							</li>
-							<li class="nbs-flexisel-item" style="width: 128.75px;">
-								<a href="#product-page3" role="tab" data-toggle="tab" aria-expanded="false">
-									<img src="../assets/img/examples/product3.jpg">
-								</a>
-							</li>
-							<li class="nbs-flexisel-item" style="width: 128.75px;">
-								<a href="#product-page4" role="tab" data-toggle="tab" aria-expanded="true">
-									<img src="../assets/img/examples/product4.jpg">
-								</a>
-							</li>
-                        <li class="nbs-flexisel-item" style="width: 128.75px;">
-								<a href="#product-page1" role="tab" data-toggle="tab" aria-expanded="false">
-									<img src="../assets/img/examples/product1.jpg">
-								</a>
-							</li><li class="active nbs-flexisel-item" style="width: 128.75px;">
-								<a href="#product-page2" role="tab" data-toggle="tab" aria-expanded="false">
-									<img src="../assets/img/examples/product2.jpg">
-								</a>
-							</li><li class="nbs-flexisel-item" style="width: 128.75px;">
-								<a href="#product-page3" role="tab" data-toggle="tab" aria-expanded="false">
-									<img src="../assets/img/examples/product3.jpg">
-								</a>
-							</li></ul></div><div class="nbs-flexisel-nav-left" style="visibility: visible; font-size: 22px; top: 73.5px;"><i class="fa fa-angle-left"></i></div><div class="nbs-flexisel-nav-right" style="visibility: visible; font-size: 22px; top: 73.5px;"><i class="fa fa-angle-right"></i></div></div>
-                    </div>
-                    <div class="col-md-6 col-sm-6">
-						<h2 class="title"> {{product.title}}</h2>
+<div class="row text-left">
+    <a href="/products/{{product.id}}/images/create">ADD PHOTO</a>
+</div>
+<div class="row text-left">
+    {% for image in images %}
+    <a href="/images/{{image.id}}/delete">DELETE PHOTO {{image.id}}</a>
+    {% endfor %}
+</div>
+<div class="main main-raised main-product" style="top:18em;background: rgba(255, 255, 255, 0.36);">
+                
+                <div class="row">
+                    
+                    <div class="col-md-6 col-sm-6 col-md-offset-6" style="background-color:#8a8a8a; color:#FFF;">
+						<h2 class="title" style="color:#FFF;"> {{product.title}}</h2>
 						<h3 class="main-price">${{product.price}}</h3> {# get currency filter #}
 						<div id="acordeon">
                             <div class="panel-group" id="accordion">
@@ -156,8 +115,9 @@
 	
     $("body").vegas({
     slides: [
-
-        { src: "/uploads/{{image.src}}" }
+      {% for image in images %}
+        { src: "/uploads/{{image.src}}" },
+      {% endfor %}
     ],
      overlay: 'assets/02.png'
 });

@@ -2,9 +2,9 @@
 
 
 {% block content %}
-{{product|json}}
+
 <div class="container">
-{{ form.open({{url: '/products' product.id '/images', method: 'POST'}) }}
+{{ form.open({ action: 'ImageController.store', params: {id: product.id}, files:true }) }}
 
     {{ csrfField }}
 
