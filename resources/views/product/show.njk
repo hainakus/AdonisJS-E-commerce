@@ -1,6 +1,8 @@
 {% extends 'master' %}
 {% set Product = use('App/Model/Product') %}
 {% set Image = use('App/Model/Image') %}
+{% set User = use('App/Model/User') %}
+{% yield user = User.find(1) %}
 {% block styles %}
     {{super()}}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.4.1/css/swiper.css" />
@@ -34,12 +36,16 @@
 <div class="row text-left">
 <div class="col-md-5">
     <a href="" onclick="goBack()"><i class="fa fa-eercast fa-3x" aria-hidden="true"></i>BACK</a>
+    {% yield admin = user.role().fetch() %}
+   
+    {% if admin.role == 'admin' %}
     <a href="#" data-toggle="modal" data-target="#shopModal">ADD PHOTO</a>
 
 
     {% for image in images %}
     <a href="/images/{{image.id}}/delete">DELETE PHOTO {{image.id}}</a>
     {% endfor %}
+    {% endif %}
  </div>   
 
                         <div class="col-md-2 col-md-offset-5">

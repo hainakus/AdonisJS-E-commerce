@@ -27,6 +27,9 @@ class User extends Lucid {
   images() {
     return this.hasManyThrough('App/Model/Image', 'App/Model/Product')
   }
+  role() {
+    return this.hasOne('App/Model/Role')
+  }
 }
 
 module.exports = User
