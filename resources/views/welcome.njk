@@ -15,7 +15,9 @@
 	
     $("body").vegas({
     slides: [
-
+	{% for image in images %}
+        { src: "/uploads/{{image.avatar}}" },
+	{% endfor %}
       
         { src: "/assets/tom.jpg" }
     ],

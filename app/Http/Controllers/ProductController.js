@@ -10,7 +10,9 @@ class ProductController {
     * show (request, response){
         const product = yield Product.findOrFail(request.param('id'))
         const images = yield product.images().fetch()
-         yield response.sendView('product.show', { product: product.toJSON(), images:images.toJSON() })
+     const productImages = yield Image.all() 
+     const productIs = yield Product.query().has('images').fetch()
+         yield response.sendView('product.show', { product: product.toJSON(), images:images.toJSON(), productImages:productImages.toJSON(), productIs:productIs.toJSON() })
     }
     * create (request, response){
         yield response.sendView('product.create')

@@ -695,3 +695,39 @@ select {
 .modal{
     background: #5e5b5f;
 }
+.card {
+    display: inline-block;
+    position: absolute;
+    width: 100%;
+    height: 30vh;
+    top: 20em;
+    left: 5em;
+}
+.form-group label.control-label {
+    font-size: 20px;
+    line-height: 1.07143;
+    color: #AAAAAA;
+    font-weight: 400;
+    margin: 16px 0 0 0;
+}
+.grid-sizer,
+.grid-item { width: 40%; height: 300px;}
+/* 2 columns */
+.grid-item--width2 { width: 320px;height: 300px; }
+.grid-item--width3 { width: 480px;height: 300px; }
+.grid-item--width4 { width: 640px;height: 300px; }
+
+.grid-item--height2 { height: 200px; height: 300px;}
+.grid-item--height3 { height: 260px;height: 300px; }
+.grid-item--height4 { height: 360px; height: 300px;}
+
+.space{
+    height: 35px;
+}
+
+.product-price{
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    font-size: 1.1em;
+} 
