@@ -1,5 +1,9 @@
 @import url('https://fonts.googleapis.com/css?family=Quicksand:300,400,500,700&subset=latin-ext,vietnamese');   
-body{font-family: 'Quicksand', sans-serif;}
+body{
+font-family: 'Quicksand', sans-serif;
+    overflow-x: hidden;
+
+}
    h4{
     	font-weight: 600;
 	}
@@ -82,7 +86,7 @@ body {
     margin-left: -250px;
     overflow-y: auto;
     background-color:#312A25 !Important;
-   
+    overflow-x: hidden;
     -webkit-transition: all 0.5s ease;
     -moz-transition: all 0.5s ease;
     -o-transition: all 0.5s ease;
@@ -679,15 +683,15 @@ select {
     padding: 0.5rem;
     text-transform: uppercase;
 }
-#menu-toggle{
-        position: relative;
-    left: 6em;
-}
+
 #avatar{
     width: 48px;
     height: 48px;
     border-radius: 50px;
     margin-top: 0px;
     position: relative;
-    right:2em;
+    left:1em;
+}
+.modal{
+    background: #5e5b5f;
 }

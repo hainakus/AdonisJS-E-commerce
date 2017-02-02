@@ -24,7 +24,21 @@
                           <li><a href="/dashboard/{{currentUser.id}}"><i class="fa fa-user"></i><span style="margin-left:10px;">Profile</span></a> </li>
                                 <li><a href="/logout"><i class="fa fa-btn fa-sign-out"></i><span style="margin-left:10px;">Logout</span></a></li>
                            
-                        
+                                <li>
+                            <a href="/shop"> <i class="fa fa-shopping-cart " aria-hidden="true"> </i> <span style="margin-left:10px;"> Shop</span> </a>
+                        </li>
+                        <li>
+                            <a href="#"> <i class="fa fa-puzzle-piece" aria-hidden="true"> </i> <span style="margin-left:10px;"> Section</span> </a>
+                        </li>
+                        <li>
+                            <a href="#"> <i class="fa fa-font" aria-hidden="true"> </i> <span style="margin-left:10px;"> Section</span> </a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-info-circle " aria-hidden="true"> </i> <span style="margin-left:10px;">Section </span> </a>
+                        </li>
+                        <li>
+                            <a href="#"> <i class="fa fa-comment-o" aria-hidden="true"> </i> <span style="margin-left:10px;"> Section</span> </a>
+                        </li>
                     {% else %}
                     <li>
                             <a href="#"><i class="fa fa-user " aria-hidden="true"> </i> <span style="margin-left:10px;">  {{ user.username }}</span>
@@ -34,24 +48,24 @@
                         </li>    
                             <li>{{ linkTo('profile', 'View Profile', { id: user.id }) }}</li>
                                 <li><a href="/logout"><i class="fa fa-btn fa-sign-out"></i>Logout</a></li>
-                           
-                        
+                                    <li>
+                                <a href="/"> <i class="fa fa-shopping-cart " aria-hidden="true"> </i> <span style="margin-left:10px;"> Shop</span> </a>
+                            </li>
+                            <li>
+                                <a href="#"> <i class="fa fa-puzzle-piece" aria-hidden="true"> </i> <span style="margin-left:10px;"> Section</span> </a>
+                            </li>
+                            <li>
+                                <a href="#"> <i class="fa fa-font" aria-hidden="true"> </i> <span style="margin-left:10px;"> Section</span> </a>
+                            </li>
+                            <li>
+                                <a href="#"><i class="fa fa-info-circle " aria-hidden="true"> </i> <span style="margin-left:10px;">Section </span> </a>
+                            </li>
+                            <li>
+                                <a href="#"> <i class="fa fa-comment-o" aria-hidden="true"> </i> <span style="margin-left:10px;"> Section</span> </a>
+                            </li>
+                                    
                     {% endif %}
-                <li>
-                    <a href="/"> <i class="fa fa-shopping-cart " aria-hidden="true"> </i> <span style="margin-left:10px;"> Shop</span> </a>
-                </li>
-                <li>
-                    <a href="#"> <i class="fa fa-puzzle-piece" aria-hidden="true"> </i> <span style="margin-left:10px;"> Section</span> </a>
-                </li>
-                <li>
-                    <a href="#"> <i class="fa fa-font" aria-hidden="true"> </i> <span style="margin-left:10px;"> Section</span> </a>
-                </li>
-                <li>
-                    <a href="#"><i class="fa fa-info-circle " aria-hidden="true"> </i> <span style="margin-left:10px;">Section </span> </a>
-                </li>
-                <li>
-                    <a href="#"> <i class="fa fa-comment-o" aria-hidden="true"> </i> <span style="margin-left:10px;"> Section</span> </a>
-                </li>
+                
             </ul>
         </div>
         <!-- /#sidebar-wrapper -->

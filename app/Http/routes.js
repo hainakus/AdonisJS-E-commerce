@@ -17,6 +17,7 @@
 
 const Route = use('Route')
 Route.get('/', 'HomeController.index')
+Route.get('/shop', 'ShopController.index')
 Route.post('/login', 'LoginController.login')
 Route.get('/login', 'LoginController.index')
 Route.get('/logout', 'RegisterController.doLogout')

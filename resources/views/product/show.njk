@@ -6,12 +6,12 @@
 
 {% yield image = productImage.images().first() %}
 
-<div class="container-fluid">
+
 <div class="row text-right">
                             <button class="btn btn-rose btn-round">Cart &nbsp;<i class="material-icons">shopping_cart</i></button>
                         </div>
 <div class="row text-left">
-    <a href="/products/{{product.id}}/images/create">ADD PHOTO</a>
+    <a href="#" data-toggle="modal" data-target="#shopModal">ADD PHOTO</a>
 </div>
 <div class="row text-left">
     {% for image in images %}
@@ -106,7 +106,8 @@
                     </div>
                 </div>
             </div>
-</div>
+
+{% include 'product.modal' %}
 {% endblock %}
 
 {% block scripts %}
