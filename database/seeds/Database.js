@@ -17,9 +17,19 @@ const Factory = use('Factory')
 class DatabaseSeeder {
 
   * run () {
-    yield Factory.model('App/Model/Product').create(25) 
-  }
+   
+    
+     yield Factory.model('App/Model/Product').create(10)
 
+  
+  const users = yield Factory.model('App/Model/User').create(15)
+    users.each(function * (user) {
+      const role = Factory.model('App/Model/Role').make()
+      const profile = Factory.model('App/Model/Profile').make()
+      yield user.role().save(role);
+      yield user.profile().save(profile);
+    })
+  }
 }
 
 module.exports = DatabaseSeeder

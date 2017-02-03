@@ -1,8 +1,44 @@
 
 {% extends 'master' %}
+{% set User = use('App/Model/User') %}
 {% block content %}
 
-{% include 'dashboard.profile.create' %}
+{% for user in users %}
+    {% yield client = User.find(user.id) %}
+    {% yield role = client.role().fetch() %}
+{% endfor %}
+{% if role.role == 'client' %}
+    
+    <table class="table table-striped table-hover ">
+            <thead>
+            <tr>
+              <th>#</th>
+              <th>NAME</th>
+              <th>AVATAR</th>
+              <th>ADDRESS</th>
+            </tr>
+            </thead>
+            <tbody>
+        {% for user in users %}
+            {% if user.profile == null %}
+
+            {% else %}
+           
+            <tr>
+              <td>{{user.id}}</td>
+              <td>{{user.username}}</td>
+              <td><img src="{{user.profile.avatar}}"></td>
+              <td>{{user.profile.address}}</td>
+            </tr>
+            <tr>
+          {% endif %}  
+          {% endfor %}    
+            </tbody>
+          </table>
+    
+{% endif %}
+
+
 
 {% endblock %}
 

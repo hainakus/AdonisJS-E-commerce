@@ -3,9 +3,8 @@ const User = use('App/Model/User')
 const Profile = use('App/Model/Profile')
 const Helpers = use('Helpers')
 class ProfileController {
-    * index (resquest, response){
-        const users = yield User.all();
-        yield response.sendView('dashboard.admin', { users: users.toJSON() }) 
+    * index (request, response){
+      return
     }
 
     * show(request, response){

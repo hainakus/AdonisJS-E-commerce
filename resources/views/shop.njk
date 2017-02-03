@@ -1,24 +1,49 @@
 {% extends 'master' %}
 {% set Product = use('App/Model/Product') %}
-
+{% set Category = use('App/Model/Category') %}
 {% block content %}
-
+  
+    <section style="height:250px;">
+        {% if currentUser.id == 1 %}
+            <ul class=" text-right">
+                <li><a href="#" class="edit btn btn-primary btn-round" id="trigger-overlay">Create Category</a></li>
+                <li> <a href="#" class=" btn btn-primary btn-round" id="trigger-overlay2" style="    top: 5em;
+    right: 13px;">Create Product</a></li>
+            </ul>
+        {% endif %}
+            <h1 style="color: #e91e63;"> SHOP LIST </h1>
+            <div class="button-group filters-button-group">
+                <button class="btn btn-raised is-checked active btn-rose" data-filter="*">show all</button>
+            
+                {% for cat in categories %}
+                {% yield catWproduct = Category.find(cat.id)  %}
+                    {% yield ifcat = catWproduct.products().first() %}
+                  
+                  {% if ifcat == null %}
+                
+                   {% else %}
+                   <button class="btn btn-raised" data-filter=".{{cat.id}}">{{cat.title}}</button>
+                   {% endif %} 
+                {% endfor %}
+            </div>
+    </section>
 	<div class="grid js-masonry">
 
 		{% for product in products %}
 		{% yield productImage = Product.find(product.id) %}
 		{% yield image = productImage.images().first() %}
+        {% yield cat = productImage.categories().first() %}
         {% set var = [3, 2, 4] %}
             {% if image == null %}
                     <a href="/products/{{product.id}}">
-                     <div class="grid-item grid-item--width{{var |random}}" style="background: url(http://ipsumimage.appspot.com/cga); background-size: cover;">
+                     <div class="grid-item grid-item--width{{var |random}} {{cat.id}}" style="background: url(http://ipsumimage.appspot.com/cga); background-size: cover;">
                         <i class="fa fa-circle-o-notch fa-{{var |random}}x" aria-hidden="true"></i>
                          <h6 class="product-price">{{product.price}}€</h6>
                      </div>
                      </a>
                     {% else %}
                     <a href="/products/{{product.id}}">
-                <div class="grid-item grid-item--width{{var |random}}" style="background: url(/uploads/{{image.src}}); background-size: cover;">
+                <div class="grid-item grid-item--width{{var |random}} {{cat.id}}" style="background: url(/uploads/{{image.src}}); background-size: cover;">
                     <i class="fa fa-circle-o-notch fa-{{var |random}}x" aria-hidden="true"></i>
                      <h6 class="product-price">{{product.price}}€</h6>
                 </div>
@@ -27,18 +52,34 @@
 			{% endif %}
 		{% endfor %}
 	</div>
-
+{% include 'category.create' %}
+{% include 'product.createModal' %}
 {% endblock %}
 
 {% block scripts %}
 {{super()}}
 <script src="https://unpkg.com/masonry-layout@4.1/dist/masonry.pkgd.min.js"></script>
-<script src="https://unpkg.com/isotope-layout@3.0/dist/isotope.pkgd.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.2/isotope.pkgd.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-infinitescroll/2.1.0/jquery.infinitescroll.js"></script>
 <script>
 $('.grid').isotope({
   // options
   itemSelector: '.grid-item',
   layoutMode: 'fitRows'
+});
+// bind filter button click
+$('.filters-button-group').on( 'click', 'button', function() {
+  var filterValue = $( this ).attr('data-filter');
+  // use filterFn if matches value
+ $('.grid').isotope({ filter: filterValue });
+});
+// change is-checked class on buttons
+$('.button-group').each( function( i, buttonGroup ) {
+  var $buttonGroup = $( buttonGroup );
+  $buttonGroup.on( 'click', 'button', function() {
+    $buttonGroup.find('.is-checked').removeClass('is-checked');
+    $( this ).addClass('is-checked');
+  });
 });
 </script>
 

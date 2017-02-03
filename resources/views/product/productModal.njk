@@ -1,0 +1,45 @@
+<div class="overlay overlay-scale">
+<button type="button" class="overlay-close">Close</button>
+<div class="container" style="top: 10em;
+    position: relative;">
+       {{ form.open({ action: 'ProductController.update', params: {id: product.id} }) }}
+
+    {{ csrfField }}
+      
+    <fieldset class="form-group">
+      {{ form.label('Product Title') }}
+      {{ form.text('title', product.title, { class: 'form-control' }) }}
+    </fieldset>
+
+    <fieldset class="form-group">
+      {{ form.label('Description') }}
+      {{ form.textarea('description', product.description, { class: 'form-control' }) }}
+    </fieldset>
+    <div class="row">
+    <div class="col-md-6">
+     <fieldset class="form-group">
+      {{ form.label('SKU') }}
+      {{ form.text('SKU', product.sku, { class: 'form-control' }) }}
+    </fieldset>
+    </div>
+    <div class="col-md-6">
+     <fieldset class="form-group">
+      {{ form.label('Price') }}
+      {{ form.text('price', product.price, { class: 'form-control' }) }}
+    </fieldset>
+    <fieldset class="form-group">
+    <label for="category">Product Categories</label> 
+      <select class="form-control" name="category">
+      {% for cat in categories %}
+        <option value="{{cat.id}}">{{cat.title}}</option>
+      {% endfor %}
+      </select>
+
+    </fieldset>
+    </div>
+    </div>
+    <div class="space"></div>
+    {{ form.submit('Publish', 'publish', { class: 'btn btn-primary btn-block' }) }}
+{{ form.close()}}
+  </div>
+</div><!-- /.modal -->

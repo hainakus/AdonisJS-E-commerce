@@ -27,9 +27,11 @@
                                 <li>
                             <a href="/shop"> <i class="fa fa-shopping-cart " aria-hidden="true"> </i> <span style="margin-left:10px;"> Shop</span> </a>
                         </li>
+                        {% if user.id == 1 %}
                         <li>
-                            <a href="#"> <i class="fa fa-puzzle-piece" aria-hidden="true"> </i> <span style="margin-left:10px;"> Section</span> </a>
+                            <a href="/users"> <i class="fa fa-puzzle-piece" aria-hidden="true"> </i> <span style="margin-left:10px;"> Client List</span> </a>
                         </li>
+                        {% endif %}
                         <li>
                             <a href="#"> <i class="fa fa-font" aria-hidden="true"> </i> <span style="margin-left:10px;"> Section</span> </a>
                         </li>

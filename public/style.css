@@ -731,3 +731,24 @@ select {
     right: 0;
     font-size: 1.1em;
 } 
+
+.edit{
+    position: absolute;
+    right: 4em;
+}
+#productModal,
+.modal .modal-dialog {
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    position: absolute;
+    margin: 0;
+    overflow-y: hidden;
+}
+.form-group label{
+        font-size: 2em;
+    color: #FFF;
+}
+.form-group textarea{
+    height: 180px;
+}

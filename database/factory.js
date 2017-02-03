@@ -29,3 +29,28 @@ Factory.blueprint('App/Model/Product', (fake) => {
     SKU: fake.integer({min: 0, max: 20})
   }
 })
+Factory.blueprint('App/Model/Category', (fake) => {
+  return {
+  title: fake.sentence(),
+  description: fake.sentence()
+  }
+})
+Factory.blueprint('App/Model/User', (fake) => {
+  return {
+    username: fake.username(),
+    password: fake.password(),
+    email: fake.email({domain: 'example.com'})
+  }
+})
+Factory.blueprint('App/Model/Role', (fake) => {
+  return 
+})
+Factory.blueprint('App/Model/Profile', (fake) =>{
+  return {
+    avatar: fake.avatar(),
+     address: fake.address(),
+      birthdate: fake.date(),
+      email: fake.email(),
+      mobile: fake.integer({min: 0, max: 20})
+  }
+})  

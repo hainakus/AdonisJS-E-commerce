@@ -2,7 +2,7 @@
 {% set Product = use('App/Model/Product') %}
 {% set Image = use('App/Model/Image') %}
 {% set User = use('App/Model/User') %}
-{% yield user = User.find(1) %}
+{% yield user = User.find(currentUser.id) %}
 {% block styles %}
     {{super()}}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.4.1/css/swiper.css" />
@@ -34,7 +34,7 @@
 
 {% yield image = productImage.images().first() %}
 <div class="row text-left">
-<div class="col-md-5">
+<div class="col-md-10">
     <a href="" onclick="goBack()"><i class="fa fa-eercast fa-3x" aria-hidden="true"></i>BACK</a>
     {% yield admin = user.role().fetch() %}
    
@@ -43,12 +43,12 @@
 
 
     {% for image in images %}
-    <a href="/images/{{image.id}}/delete">DELETE PHOTO {{image.id}}</a>
+    <a href="/images/{{image.id}}/delete" class="btn btn-rose btn-round">DELETE PHOTO {{image.id}}</a>
     {% endfor %}
     {% endif %}
  </div>   
 
-                        <div class="col-md-2 col-md-offset-5">
+                        <div class="col-md-2">
                             <button class="btn btn-rose btn-round">Cart &nbsp;<i class="material-icons">shopping_cart</i></button>
                         </div>
 
@@ -56,7 +56,10 @@
 <div class="main main-raised main-product" style="top: 4em;background: rgba(255, 255, 255, 0.36);">
                 
                 <div class="row">
-                    
+                   {% if admin.role == 'admin' %}
+                   
+                            <a href="#" class="edit" id="trigger-overlay">EDIT</a>
+                    {% endif %}
                     <div class="col-md-6 col-sm-6 col-md-offset-6" style="background-color:#8a8a8a; color:#FFF;">
 						<h2 class="title" style="color:#FFF;"> {{product.title}}</h2>
 						<h3 class="main-price">${{product.price}}</h3> {# get currency filter #}
@@ -164,6 +167,7 @@
     </div>
 </div>
 {% include 'product.modal' %}
+{% include 'product.productModal' %}
 {% endblock %}
 
 {% block scripts %}
@@ -176,10 +180,10 @@
         { src: "/uploads/{{image.src}}" },
       {% endfor %}
     ],
-     overlay: 'assets/02.png'
+     overlay: '/assets/02.png'
 });
     </script>
-
+    
 	<script src="/material.min.js"></script>
 
 	<!--	Plugin for the Sliders, full documentation here: http://refreshless.com/nouislider/ -->
@@ -248,5 +252,7 @@ function goBack() {
             slideShadows : true
         }
     });
+
+   
     </script>
 {% endblock %}

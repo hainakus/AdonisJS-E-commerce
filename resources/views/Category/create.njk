@@ -1,0 +1,21 @@
+
+<div class="overlay overlay-scale">
+<button type="button" class="overlay-close">Close</button>
+<div class="container" style="padding-top: 20em;">
+{{ form.open({action: 'CategoryController.store'}) }}
+
+    {{ csrfField }}
+
+    <fieldset class="form-group">
+      {{ form.label('Category Title') }}
+      {{ form.text('title', null, { class: 'form-control' }) }}
+    </fieldset>
+
+    <fieldset class="form-group">
+      {{ form.label('Description') }}
+      {{ form.textarea('description', null, { class: 'form-control' }) }}
+    </fieldset>
+    {{ form.submit('Publish', 'publish', { class: 'btn btn-primary btn-block' }) }}
+{{ form.close()}}
+    </div>
+</div>
