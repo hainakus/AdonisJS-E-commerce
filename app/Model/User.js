@@ -30,6 +30,12 @@ class User extends Lucid {
   role() {
     return this.hasOne('App/Model/Role')
   }
+  Wishlist() {
+    return this.belongsToMany('App/Model/Wishlist')
+  }
+  products() {
+    return this.hasManyThrough('App/Model/Product', 'App/Model/Wishlist')
+  }
 }
 
 module.exports = User

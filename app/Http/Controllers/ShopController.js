@@ -6,12 +6,10 @@ class ShopController {
   
         * index(request, response){
     const images = yield Database.select('avatar').from('profiles')
-    const products = yield Database
-  .from('products')
-  .forPage(1, 10)
+    const products = yield Product.all()
     const categories = yield Category.all()
     //const products = yield Category.query().has('products').fetch()
-    yield response.sendView('shop', {images:images, products:products, categories:categories.toJSON()})
+    yield response.sendView('shop', {images:images, products:products.toJSON(), categories:categories.toJSON()})
     }
     
 }

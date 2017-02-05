@@ -1,8 +1,10 @@
 'use strict'
+const User = use('App/Model/User');
 const Product = use('App/Model/Product');
 const Image = use('App/Model/Image');
 const Helpers = use('Helpers');
 const Category = use('App/Model/Category')
+const Wishlist = use('App/Model/Wishlist')
 class ProductController {
     * index (request, response){
         const products = yield Category.with('products').fecth();
@@ -14,7 +16,10 @@ class ProductController {
      const productImages = yield Image.all()
      const categories = yield Category.all() 
      const productIs = yield Product.query().has('images').fetch()
-         yield response.sendView('product.show', { product: product.toJSON(), images:images.toJSON(), productImages:productImages.toJSON(), productIs:productIs.toJSON(), categories:categories.toJSON() })
+     const wishlists = yield Wishlist.query('user').where('user_id', '=', request.currentUser.id).fetch()
+         yield response.sendView('product.show', { product: product.toJSON(), images:images.toJSON(),
+              productImages:productImages.toJSON(), productIs:productIs.toJSON(),
+               categories:categories.toJSON(), wishlists:wishlists.toJSON() })
     }
     * create (request, response){
         yield response.sendView('product.create')
@@ -69,6 +74,23 @@ class ProductController {
       yield product.categories().sync([dataCat])
      
       response.redirect('back')
+    }
+    * destroy(request,response){
+        const id = request.param('id');
+      const product = yield Product.with().where({ id }).firstOrFail();
+      yield product.wishlist().detach();
+        response.redirect('back')
+
+    }
+
+    * addToWishlist(request,response){
+      const id = request.param('id');
+      const product = yield Product.find(id)
+      const wishID = request.input('wishlist')
+      const wishlist = yield Wishlist.find(wishID);
+      const user = request.currentUser
+      yield wishlist.products().attach([product.id])
+      yield response.redirect('back')
     }
 }
 

@@ -16,6 +16,7 @@
               <th>NAME</th>
               <th>AVATAR</th>
               <th>ADDRESS</th>
+              <th>SHOW PROFILE</th>
             </tr>
             </thead>
             <tbody>
@@ -27,8 +28,9 @@
             <tr>
               <td>{{user.id}}</td>
               <td>{{user.username}}</td>
-              <td><img src="{{user.profile.avatar}}"></td>
+              <td><a href="/dashboard/{{user.id}}"><img src="/uploads/{{user.profile.avatar}}" class="img-responsive" id="avatar"></a></td>
               <td>{{user.profile.address}}</td>
+              <td><a href="/dashboard/{{user.id}}">SHOW PROFILE</a></td>
             </tr>
             <tr>
           {% endif %}  

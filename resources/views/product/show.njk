@@ -5,27 +5,10 @@
 {% yield user = User.find(currentUser.id) %}
 {% block styles %}
     {{super()}}
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.4.1/css/swiper.css" />
+    
     <style>
-    body {
-        background: #fff;
-        font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-        font-size: 14px;
-        color:#000;
-        margin: 0;
-        padding: 0;
-    }
-    .swiper-container {
-        width: 100%;
-        padding-top: 50px;
-        padding-bottom: 50px;
-    }
-    .swiper-slide {
-        background-position: center;
-        background-size: cover;
-        width: 300px;
-        height: 300px;
-    }
+   
+   
     </style>
 {% endblock %}
 {% block content %}
@@ -33,18 +16,39 @@
 {% yield productImage = Product.find(product.id) %}
 
 {% yield image = productImage.images().first() %}
+<div class="container-fluid">
 <div class="row text-left">
 <div class="col-md-10">
-    <a href="" onclick="goBack()"><i class="fa fa-eercast fa-3x" aria-hidden="true"></i>BACK</a>
+    
     {% yield admin = user.role().fetch() %}
    
     {% if admin.role == 'admin' %}
-    <a href="#" data-toggle="modal" data-target="#shopModal">ADD PHOTO</a>
+    <a href="#" id="trigger-overlay2">ADD PHOTO</a>
 
 
     {% for image in images %}
     <a href="/images/{{image.id}}/delete" class="btn btn-rose btn-round">DELETE PHOTO {{image.id}}</a>
+   
     {% endfor %}
+    {% endif %}
+   
+    {% if wishlists[0] === null %}
+        <a href="#" class="edit btn btn-rose btn-round" id="trigger-overlay">CREATE WISHLIST</a>
+         {% include 'Wishlist.create' %}
+    {% else %}
+    {{ form.open({action: 'ProductController.addToWishlist', params: {id: product.id} }) }}
+      {{ csrfField }}
+    <div class="form-group">
+        <label for="sel1">Select list:</label>
+        <select class="form-control" id="sel1" name="wishlist">
+        
+            {% for wishlist in wishlists %}
+            <option value="{{wishlist.id}}">{{wishlist.title}}</option>
+            {% endfor %}
+        </select>
+    </div>
+    {{ form.submit('ADD TO WISH', 'publish', { class: 'btn btn-primary btn-block btn-rose' }) }}
+    {{ form.close() }}
     {% endif %}
  </div>   
 
@@ -53,14 +57,17 @@
                         </div>
 
 </div>
-<div class="main main-raised main-product" style="top: 4em;background: rgba(255, 255, 255, 0.36);">
+<div class="container-fluid" style="top: 4em;background: rgba(255, 255, 255, 0.36);">
                 
-                <div class="row">
-                   {% if admin.role == 'admin' %}
+                <div class="row" style="top: 5em;position: relative;">
+                    <div class="col-md-5">
+                    <a href="/" style="position: absolute;top: 0px;"><i class="fa fa-eercast fa-3x" aria-hidden="true"></i>BACK</a>
+                    {% if admin.role == 'admin' %}
                    
                             <a href="#" class="edit" id="trigger-overlay">EDIT</a>
                     {% endif %}
-                    <div class="col-md-6 col-sm-6 col-md-offset-6" style="background-color:#8a8a8a; color:#FFF;">
+                    </div>
+                    <div class="col-md-7 col-sm-7" style="background-color:#8a8a8a; color:#FFF;">
 						<h2 class="title" style="color:#FFF;"> {{product.title}}</h2>
 						<h3 class="main-price">${{product.price}}</h3> {# get currency filter #}
 						<div id="acordeon">
@@ -144,6 +151,7 @@
                     </div>
                 </div>
             </div>
+</div>
 <div class="space"></div>
 <div class="row">
 <div class="swiper-container">
@@ -157,7 +165,11 @@
                     {% yield p = Product.find(product.id) %}
                     {% yield pimage = p.images().first() %}
                    
-            <a href="/products/{{product.id}}" class="swiper-slide" style="background-image:url(/uploads/{{pimage.src}})"></a>
+            <a href="/products/{{product.id}}" class="swiper-slide" style="background-image:url(/uploads/{{pimage.src}})">
+            <span class="price-swiper"><i class="fa fa-price"></i>{{product.price}}€</span>
+            <p class="title-swiper">{{product.title}}</p>
+            
+            </a>
                   
               
         {% endall %}
@@ -166,6 +178,7 @@
         <div class="swiper-pagination"></div>
     </div>
 </div>
+
 {% include 'product.modal' %}
 {% include 'product.productModal' %}
 {% endblock %}
@@ -208,7 +221,7 @@
 
 	<!-- Control Center for Material Kit: activating the ripples, parallax effects, scripts from the example pages etc -->
 	<script src="/material-kit.js" type="text/javascript"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.4.1/js/swiper.js"></script>
+   
     <script type="text/javascript">
 
     $(window).load(function() {

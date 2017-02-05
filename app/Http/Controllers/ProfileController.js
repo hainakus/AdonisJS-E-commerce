@@ -1,18 +1,24 @@
 'use strict'
 const User = use('App/Model/User')
 const Profile = use('App/Model/Profile')
+const Wishlist = use('App/Model/Wishlist')
 const Helpers = use('Helpers')
+const Product = use('App/Model/Product')
 class ProfileController {
     * index (request, response){
       return
     }
 
     * show(request, response){
-        const id = request.param('id');
-        const user = yield User.with().where({ id }).firstOrFail();
+      
         
-        
-        yield response.sendView('dashboard.profile.show', {user:user.toJSON()})
+    const id = request.param('id');
+        const user = yield User
+  .query()
+  .with('Wishlist.products')
+  .where('users.id', '=', id).fetch()
+        const profile = yield Profile.query().with('user').where('user_id', '=', id).fetch()
+        yield response.sendView('dashboard.profile.show', {user:user.toJSON(), profile: profile.toJSON()})
        
     }
     * create(request, response){

@@ -5,7 +5,7 @@
 	height: 100%;
 	top: 0;
 	left: 0;
-    background: rgb(155, 156, 153);
+    background: rgb(183, 185, 180);
     z-index: 9999;
 }
 
@@ -35,7 +35,7 @@
 }
 
 /* Overlay closing cross */
-.overlay2 .overlay-close {
+.overlay2 .overlay-close2 {
 	width: 80px;
 	height: 80px;
 	position: absolute;

@@ -1,11 +1,7 @@
-<div class="modal fade" id="shopModal" tabindex="-1" role="dialog">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title">Add Product Photo</h4>
-      </div>
-      <div class="modal-body">
+<div class="overlay2 overlay-scale">
+    <button type="button" class="overlay-close2">Close</button>
+    <div class="container" style="top: 6em;
+        position: relative;">
         {{ form.open({ action: 'ImageController.store', params: {id: product.id}, files:true }) }}
 
             {{ csrfField }}
@@ -22,12 +18,7 @@
         </div>
         </div>
             
-            {{ form.submit('Publish', 'publish', { class: 'btn btn-primary btn-block' }) }}
+            {{ form.submit('Publish', 'publish', { class: 'btn btn-primary btn-block btn-rose' }) }}
         {{ form.close()}}
       </div>
-      <div class="modal-footer">
-        
-      </div>
-    </div><!-- /.modal-content -->
-  </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
+  </div>    

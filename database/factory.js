@@ -54,3 +54,9 @@ Factory.blueprint('App/Model/Profile', (fake) =>{
       mobile: fake.integer({min: 0, max: 20})
   }
 })  
+Factory.blueprint('App/Model/Wishlist', (fake) => {
+  return {
+  title: fake.sentence(),
+  description: fake.sentence()
+  }
+})

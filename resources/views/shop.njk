@@ -3,16 +3,17 @@
 {% set Category = use('App/Model/Category') %}
 {% block content %}
   
-    <section style="height:250px;">
+    <section style="height:250px;    background: #797d7d;
+    margin: 0;
+    padding-bottom: 100px;">
         {% if currentUser.id == 1 %}
             <ul class=" text-right">
-                <li><a href="#" class="edit btn btn-primary btn-round" id="trigger-overlay">Create Category</a></li>
-                <li> <a href="#" class=" btn btn-primary btn-round" id="trigger-overlay2" style="    top: 5em;
+                <li><a href="#" class="edit btn  btn-round" id="trigger-overlay">Create Category</a></li>
+                <li> <a href="#" class=" btn btn-round" id="trigger-overlay2" style="    top: 5em;
     right: 13px;">Create Product</a></li>
             </ul>
         {% endif %}
-            <h1 style="color: #e91e63;"> SHOP LIST </h1>
-            <div class="button-group filters-button-group">
+        <div class="button-group filters-button-group">
                 <button class="btn btn-raised is-checked active btn-rose" data-filter="*">show all</button>
             
                 {% for cat in categories %}
@@ -26,6 +27,8 @@
                    {% endif %} 
                 {% endfor %}
             </div>
+           
+            
     </section>
 	<div class="grid js-masonry">
 
@@ -41,14 +44,14 @@
                          <h6 class="product-price">{{product.price}}€</h6>
                      </div>
                      </a>
-                    {% else %}
-                    <a href="/products/{{product.id}}">
+                     {% else %}
+                     <a href="/products/{{product.id}}">
                 <div class="grid-item grid-item--width{{var |random}} {{cat.id}}" style="background: url(/uploads/{{image.src}}); background-size: cover;">
                     <i class="fa fa-circle-o-notch fa-{{var |random}}x" aria-hidden="true"></i>
                      <h6 class="product-price">{{product.price}}€</h6>
                 </div>
                      </a>
-         
+
 			{% endif %}
 		{% endfor %}
 	</div>

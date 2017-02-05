@@ -1,8 +1,8 @@
 {% extends 'master'%}
-{% set user = currentUser %}
-{% if user %}
-{% yield profile = user.profile().fetch() %}
-{% endif %}
+
+{% set Product = use('App/Model/Product') %}
+{% set profile = profile[0] %}
+{% set user = user[0] %}
 {% block content %}
 
 
@@ -10,39 +10,97 @@
 {% if profile %}
  
  <div class="container">
-  
 
 
-  <h2>Profile</h2>
-  <img src="/uploads/{{profile.avatar}}" class="img-responsive img-rounded">
-  <p>{{profile.address}}</p>
-  <p>{{profile.email}}</p>
-  <ul class="nav nav-tabs">
-    <li class="active"><a data-toggle="tab" href="#home">My Shopping</a></li>
-    <li><a data-toggle="tab" href="#menu1">Menu 1</a></li>
-    <li><a data-toggle="tab" href="#menu2">Cart</a></li>
-    <li><a data-toggle="tab" href="#menu3">Wishlist</a></li>
-  </ul>
-
-  <div class="tab-content">
-    <div id="home" class="tab-pane fade in active">
-      <h3>My Shopping List</h3>
-      
-      
+<a href="#" class="edit btn btn-rose btn-round" id="trigger-overlay">CREATE WISHLIST</a>
+  <div class="row" style="top: 4em;
+    position: relative;">
+    <div class="col-md-2">
+      <img class="profile-avatar img-responsive img-rounded" src="/uploads/{{profile.avatar}}">
     </div>
-    <div id="menu1" class="tab-pane fade">
-      <h3>Menu 1</h3>
-      <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-    </div>
-    <div id="menu2" class="tab-pane fade">
-      <h3>Cart</h3>
-      <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>
-    </div>
-    <div id="menu3" class="tab-pane fade">
-      <h3>Wishlist</h3>
-      <p>Eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
+    <div class="col-md-10">
+      <div class="social">
+      <h5 class="name">{{profile.user.username}}</h5>
+      <p class="address">{{profile.address}}</p>
+      <p>{{profile.email}}</p>
+      </div>
     </div>
   </div>
+<div class="panel-group" id="accordion">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+        <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">
+        MY WISHLIST</a>
+      </h4>
+    </div>
+    <div id="collapse1" class="panel-collapse collapse in">
+      <div class="panel-body">
+          
+          
+         
+          <div class="swiper-container">
+        <div class="swiper-wrapper">
+       
+        {% for wishlist in user.Wishlist %}
+            <div class="wishlist">  
+              <h5>{{wishlist.title}}</h5>
+            </div>  
+            {% for product in wishlist.products %}
+               
+                 
+                    {% yield p = Product.find(product.id) %}
+                    {% yield pimage = p.images().first() %}
+              
+            <a href="/products/{{product.id}}" class="swiper-slide" style="background-image:url(/uploads/{{pimage.src}})">
+            <span class="price-swiper"><i class="fa fa-price"></i>{{product.price}}€</span>
+            <span class="remove-product"><a href="/products/{{product.id}}/delete"><i class="fa fa-trash" aria-hidden="true"></i></a></span>
+            <p class="title-swiper">{{product.title}}</p>
+            
+          
+               </a>   
+            {% endfor %} 
+           
+        {% endfor %}
+       
+        </div>
+        <!-- Add Pagination -->
+        <div class="swiper-pagination"></div>
+    </div>
+</div>
+        
+      </div>
+    </div>
+  </div>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+        <a data-toggle="collapse" data-parent="#accordion" href="#collapse2">
+        Collapsible Group 2</a>
+      </h4>
+    </div>
+    <div id="collapse2" class="panel-collapse collapse">
+      <div class="panel-body">Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+      sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
+      minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+      commodo consequat.</div>
+    </div>
+  </div>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+        <a data-toggle="collapse" data-parent="#accordion" href="#collapse3">
+        Collapsible Group 3</a>
+      </h4>
+    </div>
+    <div id="collapse3" class="panel-collapse collapse">
+      <div class="panel-body">Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+      sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
+      minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+      commodo consequat.</div>
+    </div>
+  </div>
+</div>
 
 </div>
 {% else %}
@@ -84,7 +142,7 @@
 
 </div>
 {% endif %}
-									
+    {% include 'Wishlist.create' %}
 {% endblock %}
 
 {% block styles %}
@@ -140,4 +198,27 @@ var styles = [{"featureType":"administrative","elementType":"labels","stylers":[
          {% endif %}
          
    </script> 
+
+   <script>
+
+
+    var swiper = new Swiper('.swiper-container', {
+        pagination: '.swiper-pagination',
+        effect: 'coverflow',
+        grabCursor: true,
+        centeredSlides: true,
+        preventClicksPropagation:false,
+        slidesPerView: 'auto',
+        loop:false,
+        coverflow: {
+            rotate: 50,
+            stretch: 0,
+            depth: 100,
+            modifier: 1,
+            slideShadows : true
+        }
+    });
+
+   
+    </script>
 {% endblock %}
