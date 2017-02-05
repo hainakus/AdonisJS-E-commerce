@@ -38,14 +38,12 @@
       <div class="panel-body">
           
           
-         
+        
           <div class="swiper-container">
         <div class="swiper-wrapper">
        
         {% for wishlist in user.Wishlist %}
-            <div class="wishlist">  
-              <h5>{{wishlist.title}}</h5>
-            </div>  
+          
             {% for product in wishlist.products %}
                
                  
@@ -103,7 +101,7 @@
 </div>
 
 </div>
-{% else %}
+{% elif profile == null %}
     
 <div class="container">
 {{ form.open({action: 'ProfileController.store', files:true, params: {id: user.id} }) }}

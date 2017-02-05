@@ -4,7 +4,13 @@ const Lucid = use('Lucid')
 const Hash = use('Hash')
 
 class User extends Lucid {
-
+  static get rules () { 
+    return {
+      name: 'required',
+      email: 'required|email|unique:users',
+      password: 'required',
+    }
+  }
   static boot () {
     super.boot()
 
@@ -17,7 +23,7 @@ class User extends Lucid {
       yield next
     })
   }
-
+ 
   apiTokens () {
     return this.hasMany('App/Model/Token')
   }

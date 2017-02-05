@@ -1,0 +1,123 @@
+@import url(http://fonts.googleapis.com/css?family=Raleway:100,200);
+* {
+  transition: all 30ms ease-out;
+  font-family: 'Raleway';
+}
+[data-social-icons] {
+      position: absolute;
+    list-style-type: none;
+    /* padding: 0; */
+    /* margin: 0; */
+    width: 625px;
+    left: 50%;
+    margin-left: -313px;
+    top: 50%;
+    margin-top: 28em;
+}
+[data-social-icons] li {
+      line-height: 60px;
+    width: 60px;
+    font-size: 24px;
+    text-align: center;
+    font-family: 'Raleway';
+    font-weight: 100;
+    color: white;
+    float: left;
+    margin-right: 5px;
+    height: 60px;
+}
+[data-social-icons] li:last-child {
+  margin-right: 0;
+}
+[data-social-icons]:hover [data-social-icon] {
+  background-color: gray;
+  opacity: .7;
+}
+[data-social-icons] [data-social-icon]:hover {
+  cursor: pointer;
+  animation-name: hover-anim;
+  animation-duration: 100ms;
+  animation-timing-function: ease-out;
+  animation-iteration-count: 2;
+}
+[data-social-icons] [data-social-icon~=facebook],
+[data-social-icons] [data-social-icon~=facebook]:hover {
+  background-color: #43609c;
+  opacity: 1;
+}
+[data-social-icons] [data-social-icon~=facebook]:before,
+[data-social-icons] [data-social-icon~=facebook]:hover:before {
+  content: "F";
+}
+[data-social-icons] [data-social-icon~=twitter],
+[data-social-icons] [data-social-icon~=twitter]:hover {
+  background-color: #53a7e7;
+  opacity: 1;
+}
+[data-social-icons] [data-social-icon~=twitter]:before,
+[data-social-icons] [data-social-icon~=twitter]:hover:before {
+  content: "T";
+}
+[data-social-icons] [data-social-icon~=gplus],
+[data-social-icons] [data-social-icon~=gplus]:hover {
+  background-color: #d95232;
+  opacity: 1;
+}
+[data-social-icons] [data-social-icon~=gplus]:before,
+[data-social-icons] [data-social-icon~=gplus]:hover:before {
+  content: "G";
+}
+[data-social-icons] [data-social-icon~=linkedin],
+[data-social-icons] [data-social-icon~=linkedin]:hover {
+  background-color: #0274b3;
+  opacity: 1;
+}
+[data-social-icons] [data-social-icon~=linkedin]:before,
+[data-social-icons] [data-social-icon~=linkedin]:hover:before {
+  content: "L";
+}
+[data-social-icons] [data-social-icon~=youtube],
+[data-social-icons] [data-social-icon~=youtube]:hover {
+  background-color: #ec282a;
+  opacity: 1;
+}
+[data-social-icons] [data-social-icon~=youtube]:before,
+[data-social-icons] [data-social-icon~=youtube]:hover:before {
+  content: "Y";
+}
+@keyframes hover-anim {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+.follow {
+ position: absolute;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    width: 625px;
+    left: 50%;
+    margin-left: -5em;
+    top: 50%;
+    margin-top: 10em;
+    font-size: 2.5em;
+    font-weight: 100;
+}
+.follow.facebook:after {
+  content: ' on Facebook';
+}
+.follow.twitter:after {
+  content: ' on Twitter';
+}
+.follow.gplus:after {
+  content: ' on Google+';
+}
+.follow.linkedin:after {
+  content: ' on LinkedIn';
+}
+.follow.youtube:after {
+  content: ' on YouTube';
+}

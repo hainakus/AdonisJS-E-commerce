@@ -1,10 +1,12 @@
 'use strict'
+const Event = use('Event')
 const User = use('App/Model/User');
 const Product = use('App/Model/Product');
 const Image = use('App/Model/Image');
 const Helpers = use('Helpers');
 const Category = use('App/Model/Category')
 const Wishlist = use('App/Model/Wishlist')
+const Database = use('Database')
 class ProductController {
     * index (request, response){
         const products = yield Category.with('products').fecth();
@@ -76,11 +78,15 @@ class ProductController {
       response.redirect('back')
     }
     * destroy(request,response){
-        const id = request.param('id');
-      const product = yield Product.with().where({ id }).firstOrFail();
-      yield product.wishlist().detach();
-        response.redirect('back')
-
+      const id = request.param('id');
+      const wishlistID = yield Database.from('product_wishlist').where('product_id', '=', id)
+      const product = yield Product.find(wishlistID[0].product_id)
+      yield Database
+  .table('product_wishlist')
+  .where('id', wishlistID[0].id)
+  .delete()
+         yield response.redirect('back')
+    
     }
 
     * addToWishlist(request,response){

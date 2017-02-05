@@ -6,10 +6,7 @@
 {% block styles %}
     {{super()}}
     
-    <style>
-   
-   
-    </style>
+    <link rel="stylesheet" type="text/css" href="/socials.css">
 {% endblock %}
 {% block content %}
 
@@ -32,24 +29,7 @@
     {% endfor %}
     {% endif %}
    
-    {% if wishlists[0] === null %}
-        <a href="#" class="edit btn btn-rose btn-round" id="trigger-overlay">CREATE WISHLIST</a>
-         {% include 'Wishlist.create' %}
-    {% else %}
-    {{ form.open({action: 'ProductController.addToWishlist', params: {id: product.id} }) }}
-      {{ csrfField }}
-    <div class="form-group">
-        <label for="sel1">Select list:</label>
-        <select class="form-control" id="sel1" name="wishlist">
-        
-            {% for wishlist in wishlists %}
-            <option value="{{wishlist.id}}">{{wishlist.title}}</option>
-            {% endfor %}
-        </select>
-    </div>
-    {{ form.submit('ADD TO WISH', 'publish', { class: 'btn btn-primary btn-block btn-rose' }) }}
-    {{ form.close() }}
-    {% endif %}
+    
  </div>   
 
                         <div class="col-md-2">
@@ -64,8 +44,17 @@
                     <a href="/" style="position: absolute;top: 0px;"><i class="fa fa-eercast fa-3x" aria-hidden="true"></i>BACK</a>
                     {% if admin.role == 'admin' %}
                    
-                            <a href="#" class="edit" id="trigger-overlay">EDIT</a>
+                            <a href="#" class="edit btn btn-round" id="trigger-overlay">EDIT</a>
                     {% endif %}
+                    <p class="follow">Share us</p>
+                        <ul data-social-icons>
+                            <li data-social-icon="facebook"></li>
+                            <li data-social-icon="twitter"></li>
+                            <li data-social-icon="gplus"></li>
+                            <li data-social-icon="linkedin"></li>
+                            <li data-social-icon="youtube"></li>
+                        </ul>
+                        </p>
                     </div>
                     <div class="col-md-7 col-sm-7" style="background-color:#8a8a8a; color:#FFF;">
 						<h2 class="title" style="color:#FFF;"> {{product.title}}</h2>
@@ -129,12 +118,25 @@
 
 			            <div class="row pick-size">
                             <div class="col-md-6 col-sm-6">
-                                <label>Select color</label>
-                                 <div class="form-group"><select class="select form-control" data-dropdownjs="true" style="display: none;">
-                                        <option value="1" class="selected">Rose </option>
-                                        <option value="2">Gray</option>
-										<option value="3">White</option>
-                                </select><div class="dropdownjs"><input type="text" readonly="" class="fakeinput select form-control"><ul><li value="1" selected="selected" class="selected" tabindex="-1">Rose </li><li value="2" tabindex="-1">Gray</li><li value="3" tabindex="-1">White</li></ul></div><span class="material-input"></span></div>
+                              {% if wishlists[0] === null %}
+                                    <a href="#" class="edit btn btn-rose btn-round" id="trigger-overlay">CREATE WISHLIST</a>
+                                    {% include 'Wishlist.create' %}
+                                
+                                {% else %}
+                                    {{ form.open({action: 'ProductController.addToWishlist', params: {id: product.id} }) }}
+                                    {{ csrfField }}
+                                    <div class="form-group">
+                                        <label for="sel1" style="font-size: 1em;">Select Wishlist:</label>
+                                        <select class="form-control" id="sel1" name="wishlist">
+                                        
+                                            {% for wishlist in wishlists %}
+                                            <option value="{{wishlist.id}}">{{wishlist.title}}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                    {{ form.submit('ADD TO WISH', 'publish', { class: 'btn btn-primary btn-block btn-rose' }) }}
+                                    {{ form.close() }}
+                                {% endif %}
                             </div>
                             <div class="col-md-6 col-sm-6">
                                 <label>Select size</label>
@@ -196,7 +198,7 @@
      overlay: '/assets/02.png'
 });
     </script>
-    
+    <script src="/socials.js"></script>
 	<script src="/material.min.js"></script>
 
 	<!--	Plugin for the Sliders, full documentation here: http://refreshless.com/nouislider/ -->

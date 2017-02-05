@@ -1,5 +1,5 @@
 'use strict'
-
+const Validator = use('Validator')
 class LoginController {
     * index(request, response) {
         yield response.sendView('login')

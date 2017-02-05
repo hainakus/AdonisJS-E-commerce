@@ -22,6 +22,7 @@
     "adonis-generators": "^0.7.0",
     "adonis-lucid": "^3.0.13",
     "adonis-middleware": "^1.0.10",
+    "adonis-validation-provider": "^3.0.5",
     "adonis-websocket": "^1.0.2",
     "mysql": "^2.13.0",
     "sqlite3": "^3.1.8",

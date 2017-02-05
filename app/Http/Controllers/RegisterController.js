@@ -1,5 +1,5 @@
 'use strict'
-
+const Validator = use('Validator')
 const User = use('App/Model/User')
 const Hash = use('Hash')
 const Role = use('App/Model/Role')
@@ -11,7 +11,12 @@ class RegisterController {
     * doRegister(request, response) {
     const data = request.only('name', 'email', 'password')
     const admin = yield User.find(1)
+    const validation = yield Validator.validate(data, User.rules)  
 
+    if (validation.fails()) { 
+      yield response.sendView('404', {messages:validation.messages()}) 
+      return
+    }
        
     
      if (admin){
