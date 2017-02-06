@@ -28,7 +28,7 @@ class ProfileController {
             .query()
             .with('Items.products')
             .where('users.id', '=', id).fetch()
-        const sql = yield Database.schema.raw("SELECT p.product_id, s.title, s.description, s.price, sum(p.quantity) as SumProductQuantity FROM products as S JOIN items as p on S.id = p.product_id WHERE p.quantity > 1 GROUP BY s.title, s.description, s.price,  p.product_id")
+        const sql = yield Database.schema.raw("SELECT p.product_id, s.title, s.description, s.price, sum(p.quantity) as SumProductQuantity FROM products S JOIN items p on S.id = p.product_id WHERE p.quantity > 1 GROUP BY s.title, s.description, s.price,  p.product_id")
        
 
         yield response.sendView('dashboard.profile.show', {user:user.toJSON(), profile: profile.toJSON(), carts:carts.toJSON(), sql:sql}) 
