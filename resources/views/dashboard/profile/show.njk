@@ -92,7 +92,7 @@
                 </tr>
               </thead>
               <tbody>
-    
+              {{sql[0]|json}}
            
                 {% for product in sql[0] %}
                 {% yield prd = Product.find(product.product_id) %}

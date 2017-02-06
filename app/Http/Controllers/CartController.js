@@ -15,7 +15,7 @@ class CartController {
         const userCart = yield user.Items().first()
             
             
-        if (userCart === null) {
+        if (!userCart) {
 
            
 
@@ -28,7 +28,7 @@ class CartController {
         }
             var item = yield Item.create(data)
            
-        }
+        } else {
             
         const Nitem = new Item()
             Nitem.cart_id = userCart.cart_id,
@@ -36,7 +36,7 @@ class CartController {
             Nitem.quantity = request.input('quantity')
         
          yield Nitem.save()
-       
+        }
       yield response.redirect('back')
     }
     
