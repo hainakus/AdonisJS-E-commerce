@@ -41,3 +41,7 @@ Route.get('images/:id/delete', 'ImageController.destroy')
 Route.get('users', 'AdminController.index')
 
 Route.post('wishlists', 'WishlistController.store')
+
+
+Route.post('/product/:id/addToCart', 'CartController.addItem')
+Route.post('/dashboard/:id/updateCart', 'CartController.updateQuantity')

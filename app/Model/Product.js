@@ -12,7 +12,9 @@ class Product extends Lucid {
     wishlist(){
        return this.belongsToMany('App/Model/Wishlist')
     }
-   
+    item(){
+        return this.belongsTo('App/Model/Item')
+    }
 }
 
 module.exports = Product

@@ -1,8 +1,9 @@
 {% extends 'master'%}
-
+{% set Database = use('Database') %}
 {% set Product = use('App/Model/Product') %}
 {% set profile = profile[0] %}
 {% set user = user[0] %}
+{% set cart = carts[0] %}
 {% block content %}
 
 
@@ -74,14 +75,54 @@
     <div class="panel-heading">
       <h4 class="panel-title">
         <a data-toggle="collapse" data-parent="#accordion" href="#collapse2">
-        Collapsible Group 2</a>
+        MY CART</a>
       </h4>
     </div>
     <div id="collapse2" class="panel-collapse collapse">
-      <div class="panel-body">Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-      sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-      minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-      commodo consequat.</div>
+      <div class="panel-body">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Product Name</th>
+                  <th>Product Price</th>
+                  <th>Product Image</th>
+                  <th>Quantity</th>
+                  <th>Update Quantity</th>
+                </tr>
+              </thead>
+              <tbody>
+    
+           
+                {% for product in sql[0] %}
+                {% yield prd = Product.find(product.product_id) %}
+                    {% yield prdimage = prd.images().first() %}
+                 
+                <tr>
+                  <th scope="row">{{loop.index}}</th>
+                  <td>{{product.title}}</td>
+                  <td>{{product.price}}</td>
+                  <td><img src="/uploads/{{prdimage.src}}" class="img-responsive card-raised" style="width:150px;"></td>
+                  {{ form.open({ action: 'CartController.updateQuantity', params: {id: prd.id} }) }}
+                  {{ csrfField }}
+                  <td><input type="number" placeholder="{{ old('quantity', product.SumProductQuantity) }}" class="form-control" name="quantity"></input></td>
+                  <td>{{ form.submit('updateQuantity', 'publish', { class: 'btn btn-primary btn-block btn-rose' }) }}</td>
+                  {{ form.close() }}
+                </tr>
+                  
+                {% endfor %}
+               
+              </tbody>
+            </table>
+
+     
+     
+         
+            
+       
+      
+      
+      </div>
     </div>
   </div>
   <div class="panel panel-default">

@@ -139,16 +139,23 @@
                                 {% endif %}
                             </div>
                             <div class="col-md-6 col-sm-6">
-                                <label>Select size</label>
-                                 <div class="form-group"><select class="select form-control" data-dropdownjs="true" style="display: none;">
-                                        <option value="1" class="selected">Small </option>
-                                        <option value="2">Medium</option>
-                                        <option value="3">Large</option>
-                                </select><div class="dropdownjs"><input type="text" readonly="" class="fakeinput select form-control"><ul><li value="1" selected="selected" class="selected" tabindex="-1">Small </li><li value="2" tabindex="-1">Medium</li><li value="3" tabindex="-1">Large</li></ul></div><span class="material-input"></span></div>
-                            </div>
-                        </div>
+                            <form action="/product/{{product.id}}/addToCart" method="POST">
+                             {{ csrfField }}
+                                <label>Select quantity</label>
+                                {% set stock = [1,2,3,4,5,6,7,8,9,10] %}
+                                 <div class="form-group"><select class="select form-control" name="quantity">
+                                       {% for n in stock %} 
+                                        <option value="{{n}}" class="selected">{{n}} </option>
+                                        {% endfor %}
+                                </select>
+                                </div>
+                            
                         <div class="row text-right">
-                            <button class="btn btn-rose btn-round">Add to Cart &nbsp;<i class="material-icons">shopping_cart</i></button>
+                        
+                        
+                          
+                            <input type="submit"  name="publish" value="Add to Cart" class="btn btn-primary btn-block btn-rose" id="publish"></input>
+                            {{form.close()}}
                         </div>
                     </div>
                 </div>

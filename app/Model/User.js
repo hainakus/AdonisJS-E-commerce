@@ -42,6 +42,16 @@ class User extends Lucid {
   products() {
     return this.hasManyThrough('App/Model/Product', 'App/Model/Wishlist')
   }
+  cart(){
+    return this.hasOne('App/Model/Cart')
+  }
+   cartItems(){
+    return this.hasManyThrough('App/Model/CartItem' ,'App/Model/Cart')
+  }
+  Items(){
+    return this.hasManyThrough('App/Model/Item', 'App/Model/Cart')
+  }
+  
 }
 
 module.exports = User
