@@ -92,9 +92,9 @@
                 </tr>
               </thead>
               <tbody>
-              {{sql[0]|json}}
+             
            
-                {% for product in sql[0] %}
+                {% for product in sql %}
                 {% yield prd = Product.find(product.product_id) %}
                     {% yield prdimage = prd.images().first() %}
                  
@@ -105,7 +105,7 @@
                   <td><img src="/uploads/{{prdimage.src}}" class="img-responsive card-raised" style="width:150px;"></td>
                   {{ form.open({ action: 'CartController.updateQuantity', params: {id: prd.id} }) }}
                   {{ csrfField }}
-                  <td><input type="number" placeholder="{{ old('quantity', product.SumProductQuantity) }}" class="form-control" name="quantity"></input></td>
+                  <td><input type="number" placeholder="{{ old('quantity', product.quantityProducts) }}" class="form-control" name="quantity"></input></td>
                   <td>{{ form.submit('updateQuantity', 'publish', { class: 'btn btn-primary btn-block btn-rose' }) }}</td>
                   {{ form.close() }}
                 </tr>

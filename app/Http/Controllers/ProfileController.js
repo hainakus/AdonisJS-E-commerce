@@ -29,7 +29,15 @@ class ProfileController {
             .with('Items.products')
             .where('users.id', '=', id).fetch()
         
-        yield response.sendView('dashboard.profile.show', {user:user.toJSON(), profile: profile.toJSON(), carts:carts.toJSON()}) 
+        const sql =  yield Database.table('products').innerJoin('items', function () {
+  this
+    
+    .on('products.id', 'items.product_id')
+})
+.select('items.product_id', 'products.title', 'products.description', 'products.price')
+.sum('items.quantity as quantityProducts')
+.groupBy('items.product_id', 'products.title', 'products.description', 'products.price')
+        yield response.sendView('dashboard.profile.show', {user:user.toJSON(), profile: profile.toJSON(), carts:carts.toJSON(), sql:sql}) 
           
         }
          const userId = request.currentUser.id 
@@ -43,8 +51,16 @@ class ProfileController {
   .with('Wishlist.products')
   .where('users.id','=', userId).fetch()
         const profile = yield Profile.query().with('user').where('user_id','=', userId).fetch()
-        
-        yield response.sendView('dashboard.profile.show', {user:user.toJSON(), profile: profile.toJSON()})
+        const sql =  yield Database.table('products').innerJoin('items', function () {
+  this
+    
+    .on('products.id', 'items.product_id')
+})
+.select('items.product_id', 'products.title', 'products.description', 'products.price')
+.sum('items.quantity as quantityProducts')
+.groupBy('items.product_id', 'products.title', 'products.description', 'products.price')
+
+       yield response.sendView('dashboard.profile.show', {user:user.toJSON(), profile: profile.toJSON(), sql:sql})
     } 
     
         yield response.status(403).send(request.currentUser.id)
