@@ -865,3 +865,7 @@ input[type=submit].btn-block {
     float: right;
     right: 8rem;
 }
+h2.title {
+    margin-bottom: 30px;
+    font-size: 1.4em;
+}
