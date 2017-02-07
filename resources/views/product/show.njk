@@ -266,7 +266,7 @@
             slideShadows : true
         }
     });
-{% if admin.role == 'admin' %}
+
    (function() {
 	var triggerBttn = document.getElementById( 'trigger-overlay3' ),
 		overlay = document.querySelector( 'div.overlay3' ),
@@ -307,6 +307,6 @@
 	triggerBttn.addEventListener( 'click', toggleOverlay );
 	closeBttn.addEventListener( 'click', toggleOverlay );
 })();
-{% endif %}
+
     </script>
 {% endblock %}
