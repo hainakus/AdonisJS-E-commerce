@@ -45,9 +45,7 @@ class User extends Lucid {
   cart(){
     return this.hasOne('App/Model/Cart')
   }
-   cartItems(){
-    return this.hasManyThrough('App/Model/CartItem' ,'App/Model/Cart')
-  }
+ 
   Items(){
     return this.hasManyThrough('App/Model/Item', 'App/Model/Cart')
   }

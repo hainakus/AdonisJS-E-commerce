@@ -12,41 +12,39 @@ class CartController {
     * addItem (request,response){
         const user = yield User.findOrFail(request.currentUser.id)
 
-        const userCart = yield user.Items().first()
+        const Cart = yield user.Items().where('items.cart_id', '>=', 1)
             
             
-        if (!userCart) {
+        if (Cart=== null) {
 
            
 
-         const cart = yield Cart.create({user_id:user.id})
+         var cart = yield Cart.create({user_id:user.id})
           
-          const data = {
-            cart_id : cart.id,
-            product_id: request.param('id'),
-            quantity: request.input('quantity')
         }
-            var item = yield Item.create(data)
+        if (Cart){
+            var cart = {id:Cart.cart_id}
+        }
            
-        } else {
+        
             
         const Nitem = new Item()
-            Nitem.cart_id = userCart.cart_id,
+            Nitem.cart_id = cart.id,
             Nitem.product_id = request.param('id'),
             Nitem.quantity = request.input('quantity')
         
          yield Nitem.save()
-        }
+        
       yield response.redirect('back')
     }
     
     * updateQuantity(request,response){
         const user = yield User.findOrFail(request.currentUser.id)
        
-        const userCart = yield user.Items().first()
+        const Cart = yield user.Items().where('items.cart_id', '>=', 1)
         
         const data = {
-       cart_id : userCart.cart_id,
+       cart_id : Cart.cart_id,
             product_id: request.param('id'),
             quantity: request.input('quantity')
         }

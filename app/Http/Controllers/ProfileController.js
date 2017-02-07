@@ -74,6 +74,7 @@ class ProfileController {
         const id = request.param('id');
         const user = yield User.with().where({ id }).firstOrFail();
     const file = request.file('imagem')
+    if (file){
      const fileName = `${new Date().getTime()}.${file.extension()}`
      
        yield file.move(Helpers.publicPath('uploads'), fileName)
@@ -82,9 +83,18 @@ class ProfileController {
          
           return
       }
-
+    
          const profile = {
           avatar :fileName,
+      address:request.input('address'),
+      birthdate:request.input('birthdate'),
+      email:request.input('email'),
+      mobile: request.input('mobile'),
+      user_id:user.id
+        }
+      } 
+          const profile = {
+          avatar :'avatar.jpg',
       address:request.input('address'),
       birthdate:request.input('birthdate'),
       email:request.input('email'),
