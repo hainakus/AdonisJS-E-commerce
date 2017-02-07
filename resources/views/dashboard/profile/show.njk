@@ -93,6 +93,7 @@
                   <th>Product Image</th>
                   <th>Quantity</th>
                   <th>Update Quantity</th>
+                  <th>Remove Product</th>
                 </tr>
               </thead>
               <tbody>
@@ -112,6 +113,12 @@
                   <td><input type="number" placeholder="{{ old('product.quantity', product.quantityProducts) }}" class="form-control" name="quantity" min="1"></input></td>
                   <td>{{ form.submit('updateQuantity', 'publish', { class: 'btn btn-primary btn-block btn-rose' }) }}</td>
                   {{ form.close() }}
+                  <td>
+                  {{ form.open({action: 'CartController.removeProduct', params: {id: product.product_id} }) }}
+                  {{ csrfField }}
+                  {{ form.submit('Remove', 'publish', { class: 'btn btn-primary btn-block btn-rose' }) }}</td>
+                  {{ form.close() }}
+                  </td>
                 </tr>
                   
                 {% endfor %}

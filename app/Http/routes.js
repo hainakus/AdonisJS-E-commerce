@@ -45,3 +45,4 @@ Route.post('wishlists', 'WishlistController.store')
 
 Route.post('/product/:id/addToCart', 'CartController.addItem')
 Route.post('/dashboard/:id/updateCart', 'CartController.updateQuantity')
+Route.post('/dashboard/:id/removeProduct', 'CartController.removeProduct')

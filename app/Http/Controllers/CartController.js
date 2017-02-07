@@ -55,7 +55,17 @@ class CartController {
   
      yield response.redirect('back')
     }
-
+    
+    * removeProduct(request,response){
+     const id = request.param('id');
+      
+      yield Database
+  .table('items')
+  .where('product_id',id)
+  .delete()
+         yield response.redirect('back')
+    
+    }
 
 }
 
