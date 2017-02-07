@@ -242,8 +242,9 @@ body {
  } 
  
   #wrapper   i {
- float:right;
+ float:left;
  } 
+
 
     #page-content-wrapper {
         padding: 5px;
@@ -722,7 +723,7 @@ select {
 .grid-item--height4 { height: 360px; height: 300px;}
 
 .space{
-    height: 35px;
+    height: 70px;
 }
 
 .product-price{
@@ -839,4 +840,28 @@ a:hover, a:focus {
     font-size: xx-large;
     text-transform: uppercase;
     top: 4em;
+}
+#slider{
+    position:relative;
+    top:4em;
+}
+#product-details{
+        width: 69vw;
+    padding: 1em;
+}
+.wishlist-create{
+    position: relative;
+    top: 4rem;
+    left: 6em;
+}
+.panel .panel-heading .panel-title {
+    font-size: 1rem;
+    font-weight: bolder;
+}
+input[type=submit].btn-block {
+    padding: 1em;
+    margin: inherit;
+    width: 10vw;
+    float: right;
+    right: 8rem;
 }

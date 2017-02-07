@@ -136,11 +136,11 @@
 }
 
 @media screen and (max-height: 30.5em) {
-	.overlay nav {
+	.overlay div {
 		height: 70%;
 		font-size: 34px;
 	}
-	.overlay ul li {
+	.overlay form input {
 		min-height: 34px;
 	}
 }

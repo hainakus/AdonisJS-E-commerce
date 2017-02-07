@@ -6,7 +6,7 @@
 {% block styles %}
     {{super()}}
     
-    <link rel="stylesheet" type="text/css" href="/socials.css">
+    
 {% endblock %}
 {% block content %}
 
@@ -37,26 +37,19 @@
                         </div>
 
 </div>
+<section id="product-details">
 <div class="container-fluid" style="top: 4em;background: rgba(255, 255, 255, 0.36);">
                 
                 <div class="row" style="top: 5em;position: relative;">
-                    <div class="col-md-5">
+                    <div class="col-md-5 col-sm-12">
                     <a href="/shop" style="position: absolute;top: 0px;"><i class="fa fa-eercast fa-3x" aria-hidden="true"></i>BACK</a>
                     {% if admin.role == 'admin' %}
                    
                             <a href="#" class="edit btn btn-round" id="trigger-overlay">EDIT</a>
                     {% endif %}
-                    <p class="follow">Share us</p>
-                        <ul data-social-icons>
-                            <li data-social-icon="facebook"></li>
-                            <li data-social-icon="twitter"></li>
-                            <li data-social-icon="gplus"></li>
-                            <li data-social-icon="linkedin"></li>
-                            <li data-social-icon="youtube"></li>
-                        </ul>
-                        </p>
+                  
                     </div>
-                    <div class="col-md-7 col-sm-7" style="background-color:#8a8a8a; color:#FFF;">
+                    <div class="col-md-7 col-sm-12" style="background-color:#8a8a8a; color:#FFF;">
 						<h2 class="title" style="color:#FFF;"> {{product.title}}</h2>
 						<h3 class="main-price">${{product.price}}</h3> {# get currency filter #}
 						<div id="acordeon">
@@ -119,7 +112,7 @@
 			            <div class="row pick-size">
                             <div class="col-md-6 col-sm-6">
                               {% if wishlists[0] === null %}
-                                    <a href="#" class="edit btn btn-rose btn-round" id="trigger-overlay3">CREATE WISHLIST</a>
+                                    <a href="#" class="wishlist-create btn btn-rose btn-round" id="trigger-overlay3">CREATE WISHLIST</a>
                                     {% include 'Wishlist.create' %}
                                 
                                 {% else %}
@@ -162,6 +155,8 @@
             </div>
 </div>
 <div class="space"></div>
+</section>
+<section id="slider">
 <div class="row">
 <div class="swiper-container">
         <div class="swiper-wrapper">
@@ -187,7 +182,7 @@
         <div class="swiper-pagination"></div>
     </div>
 </div>
-
+</section>
 {% include 'product.modal' %}
 {% include 'product.productModal' %}
 {% endblock %}
