@@ -36,7 +36,8 @@ class ProfileController {
 })
 .select('items.product_id', 'products.title', 'products.description', 'products.price')
 .sum('items.quantity as quantityProducts')
-.groupBy('items.product_id', 'products.title', 'products.description', 'products.price')
+.where('items.quantity', '>=', 1)
+.groupBy( 'products.title', 'products.description', 'products.price','items.product_id')
         yield response.sendView('dashboard.profile.show', {user:user.toJSON(), profile: profile.toJSON(), carts:carts.toJSON(), sql:sql}) 
           
         }
