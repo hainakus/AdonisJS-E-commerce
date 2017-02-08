@@ -121,6 +121,22 @@ for (index = 0; index < a.length; ++index) {
        yield Profile.create(profile) 
        yield response.redirect('back')
     }
+     * checkout(request,response){
+        const data = request.all()
+        const id = request.param('id');
+        const user = yield User.with().where({ id }).firstOrFail()
+
+       var item = yield Database
+        .select('product_id', 'cart_id', 'quantity')  
+        .table('items')
+        .where('product_id',request.param('id'))
+        .groupBy('product_id', 'cart_id', 'quantity')
+        .count('*', '>', 1)
+        .distinct('product_id', 'quantity')
+        .delete()
+        yield response.redirect('/shop')
+
+  }
 }
 
 module.exports = ProfileController

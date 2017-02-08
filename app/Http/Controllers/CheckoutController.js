@@ -14,8 +14,8 @@ class CheckoutController {
 
 
 
- yield response.sendView('checkout')
-    }
-  
+      yield response.sendView('checkout')
+     }
+ 
 }
 module.exports = CheckoutController

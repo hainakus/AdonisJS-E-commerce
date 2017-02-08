@@ -130,7 +130,20 @@
  <p> TOTAL: {{total|json}}</p>
              
      
-         
+         <form action="/dashboard/{{currentUser.id}}/stripe" method="POST">
+{{ csrfField }}
+<script
+  src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+  data-key="pk_test_2jkSNKqrupbkeKC9X4BkZZKC"
+  data-amount="{{total * 100}}"
+  data-name="Demo Site - Donation for bills"
+  data-description="2 widgets for a beer"
+  data-image="/uploads/avatar.jpg"
+  data-locale="auto"
+  data-zip-code="true"
+  data-currency="eur">
+</script>
+</form>
             
        
       

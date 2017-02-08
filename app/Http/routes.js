@@ -47,4 +47,4 @@ Route.post('/product/:id/addToCart', 'CartController.addItem')
 Route.post('/dashboard/:id/updateCart', 'CartController.updateQuantity')
 Route.post('/dashboard/:id/removeProduct', 'CartController.removeProduct')
 
-Route.get('/stripe', 'CheckoutController.index')
+Route.post('/dashboard/:id/stripe', 'ProfileController.checkout')
