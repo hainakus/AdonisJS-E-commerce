@@ -14,7 +14,7 @@ class CheckoutController {
 
 
 
- yield response.sendView('checkout', {stripe:stripe})
+ yield response.sendView('checkout')
     }
   
 }
