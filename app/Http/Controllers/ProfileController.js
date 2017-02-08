@@ -24,10 +24,7 @@ class ProfileController {
             .with('Wishlist.products')
             .where('users.id', '=', id).fetch()
                     const profile = yield Profile.query().with('user').where('user_id', '=', id).fetch()
-                     const carts = yield User
-            .query()
-            .with('Items.products')
-            .where('users.id', '=', id).fetch()
+                
         
         const sql =  yield Database.table('products').innerJoin('items', function () {
   this
@@ -36,7 +33,7 @@ class ProfileController {
 })
 .select('items.product_id', 'products.title', 'products.description', 'products.price')
 .sum('items.quantity as quantityProducts')
-.where('items.quantity', '>=', 1)
+.where('items.quantity', '>=', 1, 'items.user_id', '=', id)
 .groupBy( 'products.title', 'products.description', 'products.price','items.product_id')
 
 var index;

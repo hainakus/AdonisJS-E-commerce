@@ -29,6 +29,7 @@ class CartController {
         
             
         const Nitem = new Item()
+        Nitem.user_id = user.id,
             Nitem.cart_id = cart.id,
             Nitem.product_id = request.param('id'),
             Nitem.quantity = request.input('quantity')
