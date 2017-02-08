@@ -45,6 +45,7 @@ class CartController {
         var cart = yield user.cart().where('user_id', '=', user.id)
         
         const data = {
+          user_id: user.id,  
        cart_id : cart[0].id,
             product_id: request.param('id'),
             quantity: request.input('quantity')
