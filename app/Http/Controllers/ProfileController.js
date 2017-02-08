@@ -38,7 +38,17 @@ class ProfileController {
 .sum('items.quantity as quantityProducts')
 .where('items.quantity', '>=', 1)
 .groupBy( 'products.title', 'products.description', 'products.price','items.product_id')
-        yield response.sendView('dashboard.profile.show', {user:user.toJSON(), profile: profile.toJSON(), carts:carts.toJSON(), sql:sql}) 
+
+var index;
+var a = sql;
+var total = 0;
+var v;
+for (index = 0; index < a.length; ++index) {
+   v = a[index]['price'] * a[index]['quantityProducts'];
+       total += v; 
+}
+
+        yield response.sendView('dashboard.profile.show', {user:user.toJSON(), profile: profile.toJSON(), carts:carts.toJSON(), sql:sql, total:total}) 
           
         }
          const userId = request.currentUser.id 

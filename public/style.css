@@ -869,3 +869,10 @@ h2.title {
     margin-bottom: 30px;
     font-size: 1.4em;
 }
+#profile {
+        padding: 1em;
+    margin: inherit;
+    width: 7vw;
+    float: right;
+    right: 0rem;
+}

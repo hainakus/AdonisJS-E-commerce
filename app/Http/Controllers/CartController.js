@@ -47,31 +47,32 @@ class CartController {
        cart_id : cart[0].id,
             product_id: request.param('id'),
             quantity: request.input('quantity')
-        }
-    var item = yield Database
-  .select('product_id', 'cart_id', 'quantity')  
-  .table('items')
-  .where('product_id',request.param('id'))
-  .groupBy('product_id', 'cart_id', 'quantity')
-  .count('*', '>', 1)
-  .distinct('product_id', 'quantity')
-  .delete().then(function(rows) {
-  return Database.insert(data).into('items');
-})
+                }
+            var item = yield Database
+        .select('product_id', 'cart_id', 'quantity')  
+        .table('items')
+        .where('product_id',request.param('id'))
+        .groupBy('product_id', 'cart_id', 'quantity')
+        .count('*', '>', 1)
+        .distinct('product_id', 'quantity')
+        .delete().then(function(rows) {
+        return Database.insert(data).into('items');
+        })
      yield response.redirect('back')
     }
     
     * removeProduct(request,response){
-     const id = request.param('id');
-      
-      yield Database
-  .table('items')
-  .where('product_id',id)
-  .delete()
+            const id = request.param('id');
+            
+            yield Database
+        .table('items')
+        .where('product_id',id)
+        .delete()
          yield response.redirect('back')
     
     }
 
+  
 }
 
 module.exports = CartController
