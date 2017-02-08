@@ -48,7 +48,7 @@ for (index = 0; index < a.length; ++index) {
        total += v; 
 }
 
-        yield response.sendView('dashboard.profile.show', {user:user.toJSON(), profile: profile.toJSON(), carts:carts.toJSON(), sql:sql, total:total}) 
+        yield response.sendView('dashboard.profile.show', {user:user.toJSON(), profile: profile.toJSON(), sql:sql, total:total}) 
           
         }
          const userId = request.currentUser.id 
@@ -70,11 +70,19 @@ for (index = 0; index < a.length; ++index) {
 .select('items.product_id', 'products.title', 'products.description', 'products.price')
 .sum('items.quantity as quantityProducts')
 .groupBy('items.product_id', 'products.title', 'products.description', 'products.price')
+var index;
+var a = sql;
+var total = 0;
+var v;
+for (index = 0; index < a.length; ++index) {
+   v = a[index]['price'] * a[index]['quantityProducts'];
+       total += v; 
+}
 
-       yield response.sendView('dashboard.profile.show', {user:user.toJSON(), profile: profile.toJSON(), sql:sql})
+       yield response.sendView('dashboard.profile.show', {user:user.toJSON(), profile: profile.toJSON(), sql:sql, total:total})
     } 
     
-        yield response.status(403).send(request.currentUser.id)
+        yield response.status(403).send('come back later')
        
     }
     * create(request, response){

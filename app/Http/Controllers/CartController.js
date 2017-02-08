@@ -12,14 +12,14 @@ class CartController {
     * addItem (request,response){
         const user = yield User.findOrFail(request.currentUser.id)
 
-        const carts = yield user.cart().where('user_id', '=', user.id).fetch()
+        const carts = yield user.cart().first()
             
             
         if (carts === null) {
 
            
 
-         var cart = yield Cart.create({user_id:user.id})
+         var cart = yield Cart.create({user_id:user.id, product_id:request.param('id')})
           
         }
         if (carts){
@@ -34,7 +34,7 @@ class CartController {
             Nitem.quantity = request.input('quantity')
         
          yield Nitem.save()
-        
+        yield user.cart().sync([cart.id])
       yield response.redirect('back')
     }
     

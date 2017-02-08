@@ -37,9 +37,9 @@ Factory.blueprint('App/Model/Category', (fake) => {
 })
 Factory.blueprint('App/Model/User', (fake) => {
   return {
-    username: fake.username(),
-    password: fake.password(),
-    email: fake.email({domain: 'example.com'})
+    username: 'admin',
+    password: '1123',
+    email: 'admin@gmail.com'
   }
 })
 Factory.blueprint('App/Model/Role', (fake) => {

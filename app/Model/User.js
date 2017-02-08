@@ -43,7 +43,7 @@ class User extends Lucid {
     return this.hasManyThrough('App/Model/Product', 'App/Model/Wishlist')
   }
   cart(){
-    return this.hasOne('App/Model/Cart')
+    return this.belongsToMany('App/Model/Cart')
   }
  
   Items(){

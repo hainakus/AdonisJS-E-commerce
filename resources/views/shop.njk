@@ -3,13 +3,14 @@
 {% set Category = use('App/Model/Category') %}
 {% block content %}
   
-    <section style="height:250px;    background: #797d7d;
+    <section style="   background: #797d7d;
     margin: 0;
-    padding-bottom: 100px;">
+    padding-bottom: 100px;" id="product-det">
         {% if currentUser.id == 1 %}
+        <div class="container-fluid">
             <ul class=" text-right">
                 <li><a href="#" class="edit btn  btn-round" id="trigger-overlay">Create Category</a></li>
-                <li> <a href="#" class=" btn btn-round" id="trigger-overlay2" style="    top: 5em;
+                <li> <a href="#" class=" edit btn btn-round" id="trigger-overlay2" style="    top: 5em;
     right: 13px;">Create Product</a></li>
             </ul>
         {% endif %}
@@ -28,8 +29,10 @@
                 {% endfor %}
             </div>
            
-            
+         </div> 
     </section>
+    <section id="product-det">
+   <div class="container-fluid">
 	<div class="grid js-masonry">
 
 		{% for product in products %}
@@ -54,7 +57,9 @@
 
 			{% endif %}
 		{% endfor %}
+        </div>
 	</div>
+    </section>
 {% include 'Category.create' %}
 {% include 'product.createModal' %}
 {% endblock %}

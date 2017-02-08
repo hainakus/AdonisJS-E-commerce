@@ -134,7 +134,8 @@ body {
 .sidebar-nav li a:hover {
     text-decoration: none;
     color: #fff;
-    background: rgba(93, 88, 85, 0.27);
+    background: rgba(93, 88, 85, 0.05);
+
 }
 
 .sidebar-nav li a:active,
@@ -180,8 +181,11 @@ body {
         visibility:hidden;
         
     }
-  #wrapper.toggled   i {
+  #wrapper.toggled  #menu i {
  float:right;
+ position: relative;
+    top: 2rem;
+    left: 0.4rem;
  } 
 
     #page-content-wrapper {
@@ -541,8 +545,19 @@ h1 a {
  }
 
 
-
-
+.dropdownjs > ul {
+    background: rgba(255, 255, 255, 0.65);
+    border-radius: 4px;
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
+    padding: 5px 0px;
+    overflow: auto;
+    max-width: 500px;
+}
+.dropdownjs > ul > li:hover {
+    box-shadow: 0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12), 0 5px 5px -3px rgba(0, 0, 0, 0.2);
+    background-color: #e91e63;
+    color: #FFFFFF;
+}
 
 
 
@@ -734,10 +749,11 @@ select {
 } 
 
 .edit{
-    position: absolute;
-    right: 4em;
+    position: relative;
+    right: 4rem;
     font-size: large;
     color: white;
+    top: 6rem;
 }
 #productModal,
 .modal .modal-dialog {
@@ -876,3 +892,7 @@ h2.title {
     float: right;
     right: 0rem;
 }
+#product-det{
+    width: 82vw;
+    padding: 1em;
+    }

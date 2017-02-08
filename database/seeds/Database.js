@@ -22,7 +22,7 @@ class DatabaseSeeder {
      yield Factory.model('App/Model/Product').create(10)
      yield Factory.model('App/Model/Wishlist').create(20)
   
-  const users = yield Factory.model('App/Model/User').create(15)
+  const users = yield Factory.model('App/Model/User').create(1)
     users.each(function * (user) {
       const role = Factory.model('App/Model/Role').make()
       const profile = Factory.model('App/Model/Profile').make()
