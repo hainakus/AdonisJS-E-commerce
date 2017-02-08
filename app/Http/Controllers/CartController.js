@@ -41,7 +41,7 @@ class CartController {
     * updateQuantity(request,response){
         const user = yield User.findOrFail(request.currentUser.id)
        
-        var cart = yield user.cart().where('carts.user_id', '=', user.id)
+        var cart = yield user.cart().where('user_id', '=', user.id)
         
         const data = {
        cart_id : cart[0].id,
@@ -68,7 +68,7 @@ class CartController {
   .table('items')
   .where('product_id',id)
   .delete()
-         yield response.redirect('back')
+         yield response.send(cart)
     
     }
 
