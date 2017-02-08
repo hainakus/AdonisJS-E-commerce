@@ -33,7 +33,7 @@ class ProfileController {
 })
 .select('items.product_id', 'products.title', 'products.description', 'products.price')
 .sum('items.quantity as quantityProducts')
-.where('items.quantity', '>=', 1, 'items.user_id', '=', id)
+.where('items.user_id', '=', id)
 .groupBy( 'products.title', 'products.description', 'products.price','items.product_id')
 
 var index;
@@ -66,7 +66,7 @@ for (index = 0; index < a.length; ++index) {
 })
 .select('items.product_id', 'products.title', 'products.description', 'products.price')
 .sum('items.quantity as quantityProducts')
-.where('items.quantity', '>=', 1, 'items.user_id', '=', userId)
+.where('items.user_id', '=', userId)
 .groupBy('items.product_id', 'products.title', 'products.description', 'products.price')
 var index;
 var a = sql;
