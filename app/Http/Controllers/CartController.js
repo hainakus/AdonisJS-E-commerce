@@ -68,7 +68,7 @@ class CartController {
   .table('items')
   .where('product_id',id)
   .delete()
-         yield response.rediret('back')
+         yield response.redirect('back')
     
     }
 
