@@ -110,7 +110,7 @@
                   <td><img src="/uploads/{{prdimage.src}}" class="img-responsive card-raised" style="width:150px;"></td>
                   {{ form.open({ action: 'CartController.updateQuantity', params: {id: prd.id} }) }}
                   {{ csrfField }}
-                  <td><input type="number" placeholder="{{ old('product.quantity', product.quantityProducts) }}" class="form-control" name="quantity" min="1"></input></td>
+                  <td><input type="number" placeholder="{{ old('quantity', product.quantityProducts) }}" class="form-control" name="quantity" value="{{ old('quantity', product.quantityProducts) }}" min="1"></input></td>
                   <td>{{ form.submit('updateQuantity', 'publish', { class: 'btn btn-primary btn-block btn-rose' }) }}</td>
                   {{ form.close() }}
                   <td>

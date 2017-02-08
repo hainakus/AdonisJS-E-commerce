@@ -12,18 +12,18 @@ class CartController {
     * addItem (request,response){
         const user = yield User.findOrFail(request.currentUser.id)
 
-        const Cart = yield user.Items().where('items.cart_id', '>=', 1)
+        const carts = yield user.cart().where('user_id', '=', user.id).fetch()
             
             
-        if (Cart=== null) {
+        if (carts === null) {
 
            
 
          var cart = yield Cart.create({user_id:user.id})
           
         }
-        if (Cart){
-            var cart = {id:Cart.cart_id}
+        if (carts){
+            var cart = {id:carts.id}
         }
            
         
@@ -41,18 +41,23 @@ class CartController {
     * updateQuantity(request,response){
         const user = yield User.findOrFail(request.currentUser.id)
        
-        const Cart = yield user.Items().where('items.cart_id', '>=', 1)
+        const cart = yield user.cart().where('carts.user_id', '=', user.id)
         
         const data = {
-       cart_id : Cart.cart_id,
+       cart_id : cart[0].id,
             product_id: request.param('id'),
             quantity: request.input('quantity')
         }
     var item = yield Database
+  .select('product_id', 'cart_id', 'quantity')  
   .table('items')
-  .where('product_id', request.param('id'))
-  .update(data)
-  
+  .where('product_id',request.param('id'))
+  .groupBy('product_id', 'cart_id', 'quantity')
+  .count('*', '>', 1)
+  .distinct('product_id', 'quantity')
+  .delete().then(function(rows) {
+  return Database.insert(data).into('items');
+})
      yield response.redirect('back')
     }
     

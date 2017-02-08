@@ -3,6 +3,8 @@
 const Lucid = use('Lucid')
 
 class Item extends Lucid {
+
+    
     products(){
         return this.belongsTo('App/Model/Product')
     }
