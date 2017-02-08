@@ -755,6 +755,14 @@ select {
     color: white;
     top: 6rem;
 }
+.edit2{
+    position: relative;
+    right: 4rem;
+    font-size: large;
+    color: white;
+    top: 37.5rem;
+
+}
 #productModal,
 .modal .modal-dialog {
     width: 100vw;
