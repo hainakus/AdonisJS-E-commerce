@@ -29,6 +29,16 @@ class RegisterController {
         const role = new Role()
         role.user_id = user.id
         yield role.save(role)
+
+   
+  const jwt = request.auth.authenticator('jwt')
+
+ 
+
+   const token = yield jwt.generate(user)
+    //model
+   
+    yield user.apiTokens().create({user_id:user.id, token:token})
      } else {
      
  const user = new User()
@@ -46,7 +56,14 @@ class RegisterController {
         var registerMessage = {
             success: 'Registration Successful! Now go ahead and login'
         }
-       
+      
+  
+    const jwt = request.auth.authenticator('jwt')
+
+    const token = yield jwt.generate(user)
+    //model
+   
+   yield user.apiTokens().create({user_id:user.id, token:token})
      }  
       yield response.redirect('/login')
     }

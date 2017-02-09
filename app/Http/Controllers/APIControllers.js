@@ -7,47 +7,44 @@ const Helpers = use('Helpers');
 const Category = use('App/Model/Category')
 const Wishlist = use('App/Model/Wishlist')
 const Database = use('Database')
-class ProductController {
+class APIControllers {
     * index (request, response){
         const products = yield Category.query().with('products').fetch()
-        yield response.sendView('shop', { products: products.toJSON() }) 
+        yield response.json( {products: products.toJSON() }) 
     }
     * show (request, response){
         const product = yield Product.findOrFail(request.param('id'))
         const images = yield product.images().fetch()
-     const productImages = yield Image.all()
-     const categories = yield Category.all() 
-     const productIs = yield Product.query().has('images').fetch()
-     const wishlists = yield Wishlist.query('user').where('user_id', '=', request.currentUser.id).fetch()
-         yield response.sendView('product.show', { product: product.toJSON(), images:images.toJSON(),
-              productImages:productImages.toJSON(), productIs:productIs.toJSON(),
-               categories:categories.toJSON(), wishlists:wishlists.toJSON() })
+  
+     
+     
+         yield response.json({ product: product.toJSON(), images:images.toJSON() })
     }
-    * create (request, response){
-        yield response.sendView('product.create')
-    }
+    
     * store (request, response){
-        const postData = request.all() 
+        const postdata = request.all() 
       
-         const file = request.file('imagem')
-            const fileName = `${new Date().getTime()}.${file.extension()}`
+        var index;
+        var a = postdata.images;
+        var v;
+        var file;
+for (index = 0; index < a.length; ++index) {
+   v = a[index]['src'];
+   if (v!== undefined) {
+       file = v; 
+}
+}
             
-            yield file.move(Helpers.publicPath('uploads'), fileName)
-            if (!file.move()){
-                response.badRequest({error:file.errors()})
-                
-                return
-            }
          const data = {
-               src: fileName
+               src: file
            }
            
     
       const product = new Product()
-      product.title = request.input('title'),
-      product.description = request.input('description'),
-      product.sku = request.input('sku'),
-      product.price = request.input('price')
+      product.title = postdata.product.title,
+      product.description = postdata.product.description,
+      product.sku = postdata.product.sku,
+      product.price = postdata.product.price
       
       yield product.save(product)   
       
@@ -55,7 +52,7 @@ class ProductController {
        
         
     
-        response.redirect('back')
+        response.json(product)
     }
    
     * update(request, response){
@@ -100,4 +97,4 @@ class ProductController {
     }
 }
 
-module.exports = ProductController
+module.exports = APIControllers

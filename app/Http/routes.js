@@ -61,3 +61,12 @@ Route.post('/dashboard/:id/updateCart', 'CartController.updateQuantity')
 Route.post('/dashboard/:id/removeProduct', 'CartController.removeProduct')
 
 Route.post('/dashboard/:id/stripe', 'ProfileController.checkout')
+
+
+Route.group('api', () => {
+  Route
+    .resource('products', 'APIControllers')
+    .only(['index','show', 'store', 'update', 'destroy']).middleware('auth:jwt')
+})
+.prefix('/api/v1')
+.formats(['json'], true) // all urls needs to have .json extension
