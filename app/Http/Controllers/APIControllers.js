@@ -9,8 +9,9 @@ const Wishlist = use('App/Model/Wishlist')
 const Database = use('Database')
 class APIControllers {
     * index (request, response){
-        const products = yield Category.query().with('products').fetch()
-        yield response.json( {Categories: products.toJSON() }) 
+        const products = yield Image.with('product').where('images.src','!=', 'null').fetch() //null is a bummer in here
+        
+        yield response.json({Product_Images:products.toJSON()}) 
     }
     * show (request, response){
         const product = yield Product.findOrFail(request.param('id'))
@@ -52,7 +53,7 @@ for (index = 0; index < a.length; ++index) {
        
         
     
-        response.json(product)
+        response.status(200).send('ok we have a product')
     }
    
     * update(request, response){
