@@ -10,7 +10,7 @@ const Database = use('Database')
 class APIControllers {
     * index (request, response){
         const products = yield Category.query().with('products').fetch()
-        yield response.json( {products: products.toJSON() }) 
+        yield response.json( {Categories: products.toJSON() }) 
     }
     * show (request, response){
         const product = yield Product.findOrFail(request.param('id'))
@@ -56,8 +56,8 @@ for (index = 0; index < a.length; ++index) {
     }
    
     * update(request, response){
-      const id = request.param('id');
-      const product = yield Product.with().where({ id }).firstOrFail();
+      const datap = request.all() 
+      const product = yield Product.with().where({ id: datap.id }).firstOrFail();
       const data = new Product()
         product.title = request.input('title'),
         product.description = request.input('description'),
