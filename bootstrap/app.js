@@ -31,7 +31,8 @@ const providers = [
   'adonis-auth/providers/AuthManagerProvider',
   'adonis-websocket/providers/WsProvider',
   'adonis-validation-provider/providers/ValidatorProvider',
-  'adonis-ally/providers/AllyProvider'
+  'adonis-ally/providers/AllyProvider',
+  'adonis-jsonapi/providers/JsonApiProvider'
 ]
 
 /*
@@ -51,7 +52,8 @@ const aceProviders = [
   'adonis-ace/providers/CommandProvider',
   'adonis-commands/providers/GeneratorsProvider',
   'adonis-commands/providers/HelperCommandsProvider',
-  'adonis-commands/providers/ReplProvider'
+  'adonis-commands/providers/ReplProvider',
+  'adonis-generators/providers/GeneratorsProvider'
 ]
 
 /*
@@ -111,7 +113,9 @@ const commands = [
   'Adonis/Commands/Migration:Reset',
   'Adonis/Commands/DB:Seed',
   'Adonis/Commands/Migration:Status',
-  'Adonis/Commands/Key:Generate'
+  'Adonis/Commands/Key:Generate',
+  'AdonisGenerators/Generate:JsonApiView',
+  'AdonisGenerators/Generate:Controller',
 ]
 
 module.exports = { providers, aceProviders, aliases, commands }

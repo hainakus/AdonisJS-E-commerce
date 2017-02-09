@@ -16,6 +16,16 @@
 */
 
 const Route = use('Route')
+
+Route.group('api', () => {
+})
+.prefix('/api/v1')
+.formats(['json'], true)
+
+
+
+
+
 Route.get('/', 'HomeController.index')
 Route.get('/shop', 'ShopController.index')
 Route.post('/login', 'LoginController.login')
@@ -32,9 +42,12 @@ Route.get('/products/:id', 'ProductController.show')
 Route.post('/products', 'ProductController.store')
 Route.put('/products/:id', 'ProductController.update')
 Route.get('/products/:id/delete', 'ProductController.destroy')
+Route.post('products/:id/images', 'ImageController.store')
+
+
 Route.get('categories', 'CategoryController.index')
 Route.post('/shop', 'CategoryController.store')
-Route.post('products/:id/images', 'ImageController.store')
+
 Route.get('images/:id', 'ImageController.show')
 Route.get('images/:id/delete', 'ImageController.destroy')
 
