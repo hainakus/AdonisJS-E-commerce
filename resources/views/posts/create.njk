@@ -15,9 +15,17 @@
       {{ form.label('Content') }}
       {{ form.textarea('content', null, { class: 'form-control' }) }}
     </fieldset>
-    <div class="row">
+    
+    <fieldset class="form-group">
+      {{ form.label('Youtube, Vimeo, Videos') }}
+      {{ form.text('oembed', null, { class: 'form-control' }) }}
+    </fieldset>
 
-    </div>
+    <fieldset class="form-group">
+      {{ form.label('Excerpt') }}
+      {{ form.textarea('excerpt', null, { class: 'form-control' }) }}
+    </fieldset>
+ 
   
     {{ form.submit('Publish', 'publish', { class: 'btn btn-primary btn-block btn-rose' }) }}
 {{ form.close()}}

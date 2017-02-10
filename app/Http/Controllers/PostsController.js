@@ -20,9 +20,14 @@ class PostsController {
         
 
       
-      const postData = request.only('title', 'content') 
+      const postData = request.only('title', 'content', 'excerpt', 'oembed') 
       const post = yield Post.create(postData) 
-       yield response.sendView('posts.show',{post:post.toJSON()})
+       yield response.redirect('/posts')
+    }
+    * destroy(request, response){
+        const post = yield Post.findOrFail(request.param('id'))
+
+        yield post.delete()
     }
 }
 
