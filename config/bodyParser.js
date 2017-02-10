@@ -100,6 +100,6 @@ module.exports = {
     | the maximum limit.
     |
     */
-    maxSize: '2mb'
+    maxSize: '5mb'
   }
 }

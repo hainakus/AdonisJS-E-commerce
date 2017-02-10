@@ -1,0 +1,35 @@
+{% extends 'master' %}
+
+{% block content %}
+
+    {{ form.open({action: 'PostsController.update', params:{id:post.id} }) }}
+
+    {{ csrfField }}
+
+    <fieldset class="form-group">
+      {{ form.label('Post Title') }}
+      {{ form.text('title', post.title, { class: 'form-control' }) }}
+    </fieldset>
+
+    <fieldset class="form-group">
+      {{ form.label('Content') }}
+      {{ form.textarea('content', post.content, { class: 'form-control' }) }}
+    </fieldset>
+    
+    <fieldset class="form-group">
+      {{ form.label('Youtube, Vimeo, Videos') }}
+      {{ form.url('oembed', post.Oembed, { class: 'form-control' }) }}
+    </fieldset>
+
+    <fieldset class="form-group">
+      {{ form.label('Excerpt') }}
+      {{ form.textarea('excerpt', post.excerpt, { class: 'form-control' }) }}
+    </fieldset>
+ 
+  
+    {{ form.submit('Publish', 'publish', { class: 'btn btn-primary btn-block btn-rose' }) }}
+{{ form.close()}}
+
+
+
+{% endblock %}

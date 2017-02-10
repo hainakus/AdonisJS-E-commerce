@@ -1,21 +1,39 @@
-{{posts|json}}
+
 
 {% extends 'master' %}
 
 {% block content %}
 
     <section>
+    <a href="/posts/create" class=" btn btn-rose btn-round">CREATE POST</a>
         <div class="container">
-        {% for post in posts %}
+     
+        {% for post in posts | reverse %}
               
             <div class="container">
                 <a href="/posts/{{post.id}}"><h1>{{post.title}}</h1></a>
                 <div class="col-md-6">
-                    <img class="img-responsive" src="http://placehold.it/350x150">
+                   {% if post.Oembed !== null %}
+                      <div class="embed-responsive embed-responsive-16by9">
+                        {{ embed(post.Oembed)|safe }}
+                      </div>   
+                {% else %}
+                
+                 
+                        
+                    
+                    <img class="img-responsive" src="http://placehold.it/900x300" alt=""> <!-- oembed -->
+                {% endif %}
                     
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-4">
                     <p>{{post.content}}</p>
+                    {{moment(post.updated_at).fromNow()}}
+                </div>
+                <div class="col-md-2">
+               
+                    <a href="/posts/{{post.id}}/delete"> <i class="fa fa-minus" aria-hidden="true"></i>DELETE</a>
+                    <a href="/posts/{{post.id}}/edit"> <i class="fa fa-pencil-square" aria-hidden="true"></i>EDIT</a>
                 </div>
           </div>
         {% endfor %}

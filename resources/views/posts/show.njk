@@ -17,16 +17,17 @@
                 <!-- Title -->
                 <h1>{{post.title}}</h1>
 
-        {{post|json}}
-
+        
                 <hr>
 
                 <!-- Date/Time -->
                 <p><span class="glyphicon glyphicon-time"></span> Posted on August 24, 2013 at 9:00 PM</p>
 
                 <hr>
-                {% if post.Oembed != null %}
-                    {{post.Oembed| safe}}
+                {% if oembed != null %}
+                <div class="embed-responsive embed-responsive-16by9">
+                    {{oembed| safe}}
+                </div>
                 {% else %}
                 <!-- Preview Image -->
                 <img class="img-responsive" src="http://placehold.it/900x300" alt=""> <!-- oembed -->
