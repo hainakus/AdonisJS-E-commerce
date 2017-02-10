@@ -1,0 +1,28 @@
+{{posts|json}}
+
+{% extends 'master' %}
+
+{% block content %}
+
+    <section>
+        <div class="container">
+        {% for post in posts %}
+              
+            <div class="container">
+                <a href="/posts/{{post.id}}"><h1>{{post.title}}</h1></a>
+                <div class="col-md-6">
+                    <img class="img-responsive" src="http://placehold.it/350x150">
+                    
+                </div>
+                <div class="col-md-6">
+                    <p>{{post.content}}</p>
+                </div>
+          </div>
+        {% endfor %}
+        </div>
+
+
+
+    </section>
+
+{% endblock %}

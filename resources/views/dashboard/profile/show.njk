@@ -111,7 +111,7 @@
                   {{ form.open({ action: 'CartController.updateQuantity', params: {id: prd.id} }) }}
                   {{ csrfField }}
                   <td><input type="number" placeholder="{{ old('quantity', product.quantityProducts) }}" class="form-control" name="quantity" value="{{ old('quantity', product.quantityProducts) }}" min="1"></input></td>
-                  <td>{{ form.submit('updateQuantity', 'publish', { class: 'btn btn-primary btn-block btn-rose', id:'profile' }) }}</td>
+                  <td>{{ form.submit('Update', 'publish', { class: 'btn btn-primary btn-block btn-rose', id:'profile' }) }}</td>
                   {{ form.close() }}
                   <td>
                   {{ form.open({action: 'CartController.removeProduct', params: {id: product.product_id} }) }}
@@ -169,8 +169,9 @@
 
 </div>
 {% elif profile == null %}
-    
+    shows user and then edits profile {{user|json}}
 <div class="container">
+<h4> EDIT PROFILE </h4>
 {{ form.open({action: 'ProfileController.store', files:true, params: {id: user.id} }) }}
 
     {{ csrfField }}

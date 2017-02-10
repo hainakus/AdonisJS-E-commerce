@@ -16,10 +16,10 @@
     $("body").vegas({
     slides: [
 	{% for image in images %}
-        { src: "/uploads/{{image.avatar}}" },
+        { src: "/uploads/{{image.src}}" },
 	{% endfor %}
       
-        { src: "/assets/tom.jpg" }
+        { src: "/uploads/{{images[0].src}}" }
     ],
      overlay: '/assets/02.png'
 });

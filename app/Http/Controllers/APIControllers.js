@@ -58,24 +58,45 @@ for (index = 0; index < a.length; ++index) {
    
     * update(request, response){
       const datap = request.all() 
-      const product = yield Product.with().where({ id: datap.id }).firstOrFail();
-      const data = new Product()
-        product.title = request.input('title'),
-        product.description = request.input('description'),
-        product.sku = request.input('sku'),
-        product.price = request.input('price')  
-      
-      const dataCat = request.input('category')
-          
-        
-      
+      const product = yield Product.with().where({ id: datap.product.id }).firstOrFail();
+      const productUpdate = new Product()
+        product.title = datap.product.title,
+        product.description = datap.product.description,
+        product.sku = datap.product.sku,
+        product.price = datap.product.price  
+  if(datap.images.length > 0){ 
 
-      yield product.save(data)
-      yield product.categories().sync([dataCat])
-     
-      response.redirect('back')
+yield Database
+  .table('image_product')
+  .where('product_id', datap.product.id) // destroy all previous images
+  .delete()
+
+
+      var index;
+        var a = datap.images;
+        var v;
+        var file;
+for (index = 0; index < a.length; ++index) {
+   v = a[index]['src'];
+   if (v!== undefined) {
+       file = v; 
+}
+}
+            
+         const data = {
+               src: file
+           }
+          
+
+      yield product.save(productUpdate)
+     yield product.images().create(data) 
     }
-    * destroy(request,response){
+
+    yield product.save(productUpdate)
+    
+      response.status(200).send('ok we have updated product')
+    }
+   /* * destroy(request,response){
       const id = request.param('id');
       const wishlistID = yield Database.from('product_wishlist').where('product_id', '=', id)
       const product = yield Product.find(wishlistID[0].product_id)
@@ -95,7 +116,7 @@ for (index = 0; index < a.length; ++index) {
       const user = request.currentUser
       yield wishlist.products().attach([product.id])
       yield response.redirect('back')
-    }
+    } */
 }
 
 module.exports = APIControllers

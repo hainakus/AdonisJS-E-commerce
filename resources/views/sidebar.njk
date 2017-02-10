@@ -16,7 +16,7 @@
                         <li><a href="/login"><i class="fa fa-sign-in"></i><span style="margin-left:10px;">Login</span></a></li>
                         <li><a href="/register"><i class="fa fa-user"></i><span style="margin-left:10px;">Register</span></a></li>
                         
-                    {% elif user and profile %}
+                    {% elif user %}
                        <li>
                             <span><img src="/uploads/{{profile.avatar}}" id="avatar"></span>
 
@@ -27,44 +27,15 @@
                                 <li>
                             <a href="/shop"> <i class="fa fa-shopping-cart " aria-hidden="true"> </i> <span style="margin-left:10px;"> Shop</span> </a>
                         </li>
-                        {% if user.id == 1 %}
+                        {% if user.id === 1 %}
                         <li>
                             <a href="/users"> <i class="fa fa-puzzle-piece" aria-hidden="true"> </i> <span style="margin-left:10px;"> Client List</span> </a>
                         </li>
                         {% endif %}
                         <li>
-                            <a href="#"> <i class="fa fa-font" aria-hidden="true"> </i> <span style="margin-left:10px;"> Section</span> </a>
+                            <a href="/posts"> <i class="fa fa-font" aria-hidden="true"> </i> <span style="margin-left:10px;"> Blog </span> </a>
                         </li>
-                        <li>
-                            <a href="#"><i class="fa fa-info-circle " aria-hidden="true"> </i> <span style="margin-left:10px;">Section </span> </a>
-                        </li>
-                        <li>
-                            <a href="#"> <i class="fa fa-comment-o" aria-hidden="true"> </i> <span style="margin-left:10px;"> Section</span> </a>
-                        </li>
-                    {% else %}
-                    <li>
-                            <a href="#"><i class="fa fa-user " aria-hidden="true"> </i> <span style="margin-left:10px;">  {{ user.username }}</span>
-                                
-                            </a>
-
-                        </li>    
-                            <li>{{ linkTo('profile', 'View Profile', { id: user.id }) }}</li>
-                                <li><a href="/logout"><i class="fa fa-btn fa-sign-out"></i>Logout</a></li>
-                                    <li>
-                                <a href="/"> <i class="fa fa-shopping-cart " aria-hidden="true"> </i> <span style="margin-left:10px;"> Shop</span> </a>
-                            </li>
-                            <li>
-                                <a href="#"> <i class="fa fa-puzzle-piece" aria-hidden="true"> </i> <span style="margin-left:10px;"> Section</span> </a>
-                            </li>
-                            <li>
-                                <a href="#"> <i class="fa fa-font" aria-hidden="true"> </i> <span style="margin-left:10px;"> Section</span> </a>
-                            </li>
-                            <li>
-                                <a href="#"><i class="fa fa-info-circle " aria-hidden="true"> </i> <span style="margin-left:10px;">Section </span> </a>
-                            </li>
-                            <li>
-                                <a href="#"> <i class="fa fa-comment-o" aria-hidden="true"> </i> <span style="margin-left:10px;"> Section</span> </a>
-                            </li>
+                   
                                     
                     {% endif %}
                 

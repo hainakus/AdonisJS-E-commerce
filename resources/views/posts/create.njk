@@ -1,0 +1,29 @@
+{% extends 'master' %}
+
+{% block content %}
+
+{{ form.open({action: 'PostsController.store'}) }}
+
+    {{ csrfField }}
+
+    <fieldset class="form-group">
+      {{ form.label('Post Title') }}
+      {{ form.text('title', null, { class: 'form-control' }) }}
+    </fieldset>
+
+    <fieldset class="form-group">
+      {{ form.label('Content') }}
+      {{ form.textarea('content', null, { class: 'form-control' }) }}
+    </fieldset>
+    <div class="row">
+
+    </div>
+  
+    {{ form.submit('Publish', 'publish', { class: 'btn btn-primary btn-block btn-rose' }) }}
+{{ form.close()}}
+
+
+
+
+
+{% endblock %}

@@ -9,6 +9,7 @@ class PostsTableSchema extends Schema {
       table.increments()
       table.string('title')
       table.text('content')
+      table.enum('status', ['draft', 'public']).default('draft')
       table.timestamps()
     })
   }
