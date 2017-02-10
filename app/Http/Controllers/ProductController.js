@@ -79,6 +79,15 @@ class ProductController {
     }
     * destroy(request,response){
       const id = request.param('id');
+      
+      const product = yield Product.find(id)
+      yield product
+  .delete()
+         yield response.redirect('/shop')
+    
+    }
+    * destroyWish(request,response){
+      const id = request.param('id');
       const wishlistID = yield Database.from('product_wishlist').where('product_id', '=', id)
       const product = yield Product.find(wishlistID[0].product_id)
       yield Database

@@ -41,15 +41,20 @@
         {% yield cat = productImage.categories().first() %}
         {% set var = [3, 2, 4] %}
             {% if image == null %}
+            
                     <a href="/products/{{product.id}}">
                      <div class="grid-item grid-item--width{{var |random}} {{cat.id}}" style="background: url(http://ipsumimage.appspot.com/cga); background-size: cover;">
+                        
                         <i class="fa fa-circle-o-notch fa-{{var |random}}x" aria-hidden="true"></i>
                          <h6 class="product-price">{{product.price}}€</h6>
                      </div>
                      </a>
                      {% else %}
+                      
                      <a href="/products/{{product.id}}">
+
                 <div class="grid-item grid-item--width{{var |random}} {{cat.id}}" style="background: url(/uploads/{{image.src}}); background-size: cover;">
+                   
                     <i class="fa fa-circle-o-notch fa-{{var |random}}x" aria-hidden="true"></i>
                      <h6 class="product-price">{{product.price}}€</h6>
                 </div>

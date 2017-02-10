@@ -41,6 +41,7 @@ Route.post('/products/:id/wishlists', 'ProductController.addToWishlist')
 Route.get('/products/:id', 'ProductController.show')
 Route.post('/products', 'ProductController.store')
 Route.put('/products/:id', 'ProductController.update')
+Route.get('/products/:id/deleteWish', 'ProductController.destroyWish')
 Route.get('/products/:id/delete', 'ProductController.destroy')
 Route.post('products/:id/images', 'ImageController.store')
 
