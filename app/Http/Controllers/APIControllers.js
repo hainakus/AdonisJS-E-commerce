@@ -9,7 +9,7 @@ const Wishlist = use('App/Model/Wishlist')
 const Database = use('Database')
 class APIControllers {
     * index (request, response){
-        const products = yield Image.with('product').where('images.src','!=', 'null').fetch() //null is a bummer in here
+        const products = yield Image.with('products').where('images.src','!=', 'null').fetch() //null is a bummer in here
         
         yield response.json({Product_Images:products.toJSON()}) 
     }
