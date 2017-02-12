@@ -1,48 +1,56 @@
 {% extends 'master' %}
-{% set Product = use('App/Model/Product') %}
-{% set Category = use('App/Model/Category') %}
+{% block styles %}
+{{super()}}
+<style>
+body {
+    //background: url(/assets/01.png);
+    background-color: {% for item in color %}{% if loop.last %}{{item.rgba}}{% endif %}{% endfor %};
+    color: #ffffff;
+}
+</style>
+
+{% endblock %}
 {% block content %}
-  
-    <section style="   background: #797d7d;
+
+    <section style="   background: rgba(255, 255, 255, 0.43);
     margin: 0;
     padding-bottom: 100px;" id="product-det">
-        {% if currentUser.id == 1 %}
+        
         <div class="container-fluid">
             <ul class=" text-right">
                 <li><a href="#" class="edit btn  btn-round" id="trigger-overlay">Create Category</a></li>
                 <li> <a href="#" class=" edit btn btn-round" id="trigger-overlay2" style="    top: 5em;
-    right: 13px;">Create Product</a></li>
+    right: 42px;">Create Product</a></li>
             </ul>
-        {% endif %}
+       
+
+          
         <div class="button-group filters-button-group">
                 <button class="btn btn-raised is-checked active btn-rose" data-filter="*">show all</button>
-            
-                {% for cat in categories %}
-                {% yield catWproduct = Category.find(cat.id)  %}
-                    {% yield ifcat = catWproduct.products().first() %}
-                  
-                  {% if ifcat == null %}
-                
-                   {% else %}
+         
+               
+              
+                   {% for cat in categories %}
+          
                    <button class="btn btn-raised" data-filter=".{{cat.id}}">{{cat.title}}</button>
-                   {% endif %} 
-                {% endfor %}
+                  {% endfor %}
+              
             </div>
            
          </div> 
     </section>
+    
     <section id="product-det">
    <div class="container-fluid">
 	<div class="grid js-masonry">
-
-		{% for product in products %}
-		{% yield productImage = Product.find(product.id) %}
-		{% yield image = productImage.images().first() %}
-        {% yield cat = productImage.categories().first() %}
+    
+     {% for cat in products %}
+		{% for product in cat.products %}
+		
         {% set var = [3, 2, 4] %}
-            {% if image == null %}
+            {% if product.images[0] == null %}
             
-                    <a href="/products/{{product.id}}">
+                    <a href="/backend/products/{{product.id}}">
                      <div class="grid-item grid-item--width{{var |random}} {{cat.id}}" style="background: url(http://ipsumimage.appspot.com/cga); background-size: cover;">
                         
                         <i class="fa fa-circle-o-notch fa-{{var |random}}x" aria-hidden="true"></i>
@@ -51,9 +59,9 @@
                      </a>
                      {% else %}
                       
-                     <a href="/products/{{product.id}}">
+                     <a href="/backend/products/{{product.id}}">
 
-                <div class="grid-item grid-item--width{{var |random}} {{cat.id}}" style="background: url(/uploads/{{image.src}}); background-size: cover;">
+                <div class="grid-item grid-item--width{{var |random}} {{cat.id}}" style="background: url(/uploads/{{product.images[0].src}}); background-size: cover;">
                    
                     <i class="fa fa-circle-o-notch fa-{{var |random}}x" aria-hidden="true"></i>
                      <h6 class="product-price">{{product.price}}€</h6>
@@ -62,9 +70,11 @@
 
 			{% endif %}
 		{% endfor %}
+        {% endfor %}  
         </div>
 	</div>
     </section>
+
 {% include 'Category.create' %}
 {% include 'product.createModal' %}
 {% endblock %}

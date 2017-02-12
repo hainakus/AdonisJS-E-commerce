@@ -16,7 +16,7 @@ class PostsController {
         const post = yield Post.findOrFail(id)
        
        const oembed = embed(post.Oembed)
-        yield response.sendView('posts.show', {post:post.toJSON(), oembed:oembed})
+        yield response.sendView('posts.show', {post:post.toJSON(), oembed:oembed, moment})
     }
     * create(request, response){
         yield response.sendView('posts.create')
@@ -27,7 +27,7 @@ class PostsController {
       
       const postData = request.only('title', 'content', 'excerpt', 'oembed') 
       const post = yield Post.create(postData) 
-       yield response.redirect('/posts')
+       yield response.route('blog')
     }
     *edit(request,response){
         const post = yield Post.findOrFail(request.param('id'))
@@ -45,7 +45,7 @@ class PostsController {
 
         yield post.save()
 
-        yield response.redirect('/posts')
+        yield response.route('blog')
 
     }
 

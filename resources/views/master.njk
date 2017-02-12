@@ -8,7 +8,7 @@
   <title>AdonisJs - Node.Js MVC Framework</title>
 {% block styles %}
   <!-- Material Design fonts -->
-  <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Roboto:300,400,500,700">
+  <link href="https://fonts.googleapis.com/css?family=Raleway:100" rel="stylesheet">
   <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/icon?family=Material+Icons">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vegas/2.4.0/vegas.css" />
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
@@ -18,11 +18,12 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.4.1/css/swiper.css" />
   <link rel="icon" href="/assets/favicon.png" type="image/x-icon">
   <link rel="stylesheet" type="text/css" href="/modal.css">
+  <link rel="stylesheet" type="text/css" href="/colorpicker.css">
   <link rel="stylesheet" type="text/css" href="/style.css">
   <script src="https://checkout.stripe.com/checkout.js"></script>
 {% endblock %}
 </head>
- <body  {% if not currentUser %} class="slider" {% endif %}>
+ <body>
 
     {% include 'sidebar' %}
         <!-- Page Content -->
@@ -36,26 +37,39 @@
       
 
 
-      {% block content %}{% endblock %}
+      {% block content %}
+      
+      
+      {% endblock %}
 
       {% block footer %}
-    
+       {% include 'setup' %}
       {% endblock %}
     </div>
   </div>
   
   {% block scripts %}
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+   <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.0/jquery-ui.min.js" type="text/javascript" charset="utf-8"></script>
+ <script src="/colorpicker.js"></script>
+
+<script type="text/javascript"> 
+ $("#mycolor").colorpicker();
+</script>
       <!-- Latest compiled and minified JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
  <script src="https://cdnjs.cloudflare.com/ajax/libs/vegas/2.4.0/vegas.js"></script>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jscolor/2.0.4/jscolor.js"></script>
   <script>
     $("#menu-toggle").click(function(e) {
         e.preventDefault();
         $("#wrapper").toggleClass("toggled");
     });
-
+ 
+    function update(jscolor) {
+    // 'jscolor' instance can be used as a string
+    document.body.style.backgroundColor = '#' + jscolor
+}
     
     </script>
  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.js"></script>

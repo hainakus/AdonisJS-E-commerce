@@ -1,13 +1,19 @@
 
 {% extends 'master' %}
-{% set User = use('App/Model/User') %}
+{% block styles %}
+{{super()}}
+<style>
+body {
+    //background: url(/assets/01.png);
+    //background-color: #f9f9f9;
+    color: #ffffff;
+}
+</style>
+
+{% endblock %}
 {% block content %}
 
-{% for user in users %}
-    {% yield client = User.find(user.id) %}
-    {% yield role = client.role().fetch() %}
-{% endfor %}
-{% if role.role == 'client' %}
+
     
     <table class="table table-striped table-hover ">
             <thead>
@@ -30,7 +36,7 @@
               <td>{{user.username}}</td>
               <td><a href="/dashboard/{{user.id}}"><img src="/uploads/{{user.profile.avatar}}" class="img-responsive" id="avatar"></a></td>
               <td>{{user.profile.address}}</td>
-              <td><a href="/dashboard/{{user.id}}">SHOW PROFILE</a></td>
+              <td><a href="/backend/dashboard/{{user.id}}.html">SHOW PROFILE</a></td>
             </tr>
             <tr>
           {% endif %}  
@@ -38,7 +44,7 @@
             </tbody>
           </table>
     
-{% endif %}
+
 
 
 

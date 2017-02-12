@@ -9,7 +9,7 @@ class Image extends Lucid {
      profile () {
     return this.belongsToMany('App/Model/Profile')
   }
-    product(){
+    products(){
         return this.belongsToMany('App/Model/Product')
     }
     

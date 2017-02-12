@@ -8,6 +8,8 @@ class ImageTableSchema extends Schema {
     this.create('images', (table) => {
       table.increments()
       table.string('src')
+      table.integer('product_id').unsigned();
+      table.foreign('product_id').references('id').on('products');
       table.integer('profile_id').unsigned();
       table.foreign('profile_id').references('id').on('profiles');
       table.timestamps()

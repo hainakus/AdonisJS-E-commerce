@@ -1,11 +1,21 @@
 {% extends 'master' %}
-{% yield userRole = currentUser.role().fetch() %}
+{% block styles %}
+{{super()}}
+<style>
+body {
+    //background: url(/assets/01.png);
+    background-color: {% for item in color %}{% if loop.last %}{{item.rgba}}{% endif %}{% endfor %};
+    color: #ffffff;
+}
+</style>
+
+{% endblock %}
 {% block content %}
 
 <div class="col-md-12">
 
                 <!-- Blog Post -->
-                {% if userRole.role === 'admin' %}
+               
                 <div class="togglebutton text-right">
                     <label>
                         STATUS
@@ -13,7 +23,7 @@
                         <input type="checkbox" checked="true"><span class="toggle"></span>
                     </label>
                  </div>
-                 {% endif %}
+                <div class="container">
                 <!-- Title -->
                 <h1>{{post.title}}</h1>
 
@@ -21,7 +31,7 @@
                 <hr>
 
                 <!-- Date/Time -->
-                <p><span class="glyphicon glyphicon-time"></span> Posted on August 24, 2013 at 9:00 PM</p>
+                <p><span class="glyphicon glyphicon-time"></span>   {{moment(post.updated_at)}}</p>
 
                 <hr>
                 {% if oembed != null %}
@@ -37,7 +47,7 @@
                 <!-- Post Content -->
                 <p class="lead">{{post.content}} </p>
                 <hr>
-
+                </div>
  <!-- DISQUS HERE -->
 
 

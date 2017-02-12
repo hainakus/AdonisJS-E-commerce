@@ -49,7 +49,9 @@ class User extends Lucid {
   Items(){
     return this.hasManyThrough('App/Model/Item', 'App/Model/Cart')
   }
-  
+  bckColors () {
+    return this.hasMany('App/Model/Color')
+  }
 }
 
 module.exports = User

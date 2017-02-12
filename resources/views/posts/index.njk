@@ -1,17 +1,27 @@
 
 
 {% extends 'master' %}
+{% block styles %}
+{{super()}}
+<style>
+body {
+    //background: url(/assets/01.png);
+    //background-color: #f9f9f9;
+    color: #ffffff;
+}
+</style>
 
+{% endblock %}
 {% block content %}
 
     <section>
-    <a href="/posts/create" class=" btn btn-rose btn-round">CREATE POST</a>
+    <a href="/backend/posts/create" class=" btn btn-rose btn-round">CREATE POST</a>
         <div class="container">
      
         {% for post in posts | reverse %}
               
             <div class="container">
-                <a href="/posts/{{post.id}}"><h1>{{post.title}}</h1></a>
+                <a href="/backend/posts/{{post.id}}.html"><h1>{{post.title}}</h1></a>
                 <div class="col-md-6">
                    {% if post.Oembed !== null %}
                       <div class="embed-responsive embed-responsive-16by9">
@@ -32,8 +42,8 @@
                 </div>
                 <div class="col-md-2">
                
-                    <a href="/posts/{{post.id}}/delete"> <i class="fa fa-minus" aria-hidden="true"></i>DELETE</a>
-                    <a href="/posts/{{post.id}}/edit"> <i class="fa fa-pencil-square" aria-hidden="true"></i>EDIT</a>
+                    <a href="/backend/posts/{{post.id}}/delete"> <i class="fa fa-minus" aria-hidden="true"></i>DELETE</a>
+                    <a href="/backend/posts/{{post.id}}/edit"> <i class="fa fa-pencil-square" aria-hidden="true"></i>EDIT</a>
                 </div>
           </div>
         {% endfor %}

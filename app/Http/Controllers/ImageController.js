@@ -30,7 +30,8 @@ class ImageController {
                 return
             }
          const data = {
-               src: fileName
+               src: fileName,
+               product_id: product.id
            }
             yield product.images().create(data) 
         }
@@ -40,7 +41,8 @@ class ImageController {
        const id = request.param('id');
 
     const image = yield Image.query().where({ id }).firstOrFail();
-    yield image.product().detach();
+    yield image.products().detach();
+    yield image.delete()
         response.redirect('back')
     }
 }

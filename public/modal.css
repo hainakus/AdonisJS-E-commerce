@@ -5,7 +5,7 @@
 	height: 100%;
 	top: 0;
 	left: 0;
-    background: rgb(183, 185, 180);
+    background: #fff;
     z-index: 9999;
 }
 
@@ -20,7 +20,33 @@
 	border: none;
 	background: url(../img/cross.png) no-repeat center center;
 	text-indent: 200%;
-	color: transparent;
+	color: grey;
+	outline: none;
+	z-index: 100;
+}
+/* Overlay style */
+.overlay-color {
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+    background: #FFF;
+    z-index: 9999;
+}
+
+/* Overlay closing cross */
+.overlay-color .overlay-color-close {
+	width: 80px;
+	height: 80px;
+	position: absolute;
+	right: 20px;
+	top: 20px;
+	overflow: hidden;
+	border: none;
+	background: url(../img/cross.png) no-repeat center center;
+	text-indent: 200%;
+	color: grey;
 	outline: none;
 	z-index: 100;
 }
@@ -30,7 +56,7 @@
 	height: 100%;
 	top: 0;
 	left: 0;
-    background: rgb(155, 156, 153);
+    background: #FFF;
     z-index: 9999;
 }
 
@@ -45,7 +71,7 @@
 	border: none;
 	background: url(../img/cross.png) no-repeat center center;
 	text-indent: 200%;
-	color: transparent;
+	color: grey;
 	outline: none;
 	z-index: 100;
 }
@@ -70,7 +96,7 @@
 	border: none;
 	background: url(../img/cross.png) no-repeat center center;
 	text-indent: 200%;
-	color: transparent;
+	color: grey;
 	outline: none;
 	z-index: 100;
 }

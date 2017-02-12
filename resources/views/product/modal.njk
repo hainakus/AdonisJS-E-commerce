@@ -1,4 +1,16 @@
-<div class="overlay2 overlay-scale">
+
+        
+           
+               
+
+
+<div class="overlay2 overlay-scale" 
+                                        {% set backgroundImage = productImages[0].images %}
+                                    
+style="background:url(/uploads/{{backgroundImage[0].src}}); background-size:cover;background-color:grey;">
+
+
+
     <button type="button" class="overlay-close2">Close</button>
     <div class="container" style="top: 6em;
         position: relative;">

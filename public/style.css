@@ -1,8 +1,7 @@
-@import url('https://fonts.googleapis.com/css?family=Quicksand:300,400,500,700&subset=latin-ext,vietnamese');   
-body{
-font-family: 'Quicksand', sans-serif;
-    overflow-x: hidden;
-
+ 
+*{
+    font-family: 'Raleway', sans-serif;
+   
 }
    h4{
     	font-weight: 600;
@@ -85,7 +84,7 @@ body {
     height: 100%;
     margin-left: -250px;
     overflow-y: auto;
-    background-color: #999999 !Important;
+    background-color: rgba(0, 0, 0, 0.34)!Important;
     overflow-x: hidden;
     -webkit-transition: all 0.5s ease;
     -moz-transition: all 0.5s ease;
@@ -128,7 +127,7 @@ body {
 .sidebar-nav li a {
    display: block;
     text-decoration: none;
-    color: #3c3838;
+    color: #FFF;
 }
 
 .sidebar-nav li a:hover {
@@ -435,7 +434,7 @@ ul {
 }
 
 a {
-	color: #b63b4d;
+	color: #e91e63;
 	text-decoration: none;
 }
 
@@ -449,7 +448,9 @@ h1 {
  	text-align: center;
  	margin-top: 40px;
  }
-
+.form-group label:hover, h1:hover {
+   color: #e91e63 !important;
+    }
 h1 a {
  	color: #c12c42;
  	font-size: 16px;
@@ -774,7 +775,7 @@ select {
 }
 .form-group label{
         font-size: 2em;
-    color: #FFF;
+       color: grey;
 }
 .form-group textarea{
     height: 100px;
@@ -811,9 +812,9 @@ a:hover, a:focus {
     font-size: 1.2em;
 }
 .price-swiper{
-    color: antiquewhite;
+        color: #464442;
     font-size: xx-large;
-    background-color: rgba(233, 30, 99, 0.5);
+    background-color: rgba(255, 255, 255, 0.5);
     border-right: 10px solid #e91e63;
 
 }
@@ -827,7 +828,7 @@ a:hover, a:focus {
     position: inherit;
     font-size: x-large;
     text-transform: uppercase;
-    color: #e61686;
+    color: #a5a9af;
 }
 .social .address {
     left: -1.3em;
@@ -879,7 +880,7 @@ a:hover, a:focus {
     left: 6em;
 }
 .panel .panel-heading .panel-title {
-    font-size: 1rem;
+    font-size: 1.3rem;
     font-weight: bolder;
 }
 input[type=submit].btn-block {
@@ -904,3 +905,38 @@ h2.title {
     width: 82vw;
     padding: 1em;
     }
+
+.pick-size{
+    padding-bottom: 35px;
+}
+.panel .panel-heading a:hover, .panel .panel-heading a:active, .panel .panel-heading a[aria-expanded="true"] {
+    color: #e91e63;
+}
+
+.panel .panel-heading a {
+    color:#97a2a0;
+}
+.table-striped>tbody>tr:nth-of-type(odd) {
+    background-color:rgba(76, 76, 76, 0.37);
+}
+
+body, h1, p {
+    background-color: #FFF;
+    color: grey;
+    
+}
+
+.btn.btn-rose, .btn.btn-rose:hover, .btn.btn-rose:focus, .btn.btn-rose:active, .btn.btn-rose.active, .btn.btn-rose:active:focus, .btn.btn-rose:active:hover, .btn.btn-rose.active:focus, .btn.btn-rose.active:hover, .open > .btn.btn-rose.dropdown-toggle, .open > .btn.btn-rose.dropdown-toggle:focus, .open > .btn.btn-rose.dropdown-toggle:hover, .navbar .navbar-nav > li > a.btn.btn-rose, .navbar .navbar-nav > li > a.btn.btn-rose:hover, .navbar .navbar-nav > li > a.btn.btn-rose:focus, .navbar .navbar-nav > li > a.btn.btn-rose:active, .navbar .navbar-nav > li > a.btn.btn-rose.active, .navbar .navbar-nav > li > a.btn.btn-rose:active:focus, .navbar .navbar-nav > li > a.btn.btn-rose:active:hover, .navbar .navbar-nav > li > a.btn.btn-rose.active:focus, .navbar .navbar-nav > li > a.btn.btn-rose.active:hover, .open > .navbar .navbar-nav > li > a.btn.btn-rose.dropdown-toggle, .open > .navbar .navbar-nav > li > a.btn.btn-rose.dropdown-toggle:focus, .open > .navbar .navbar-nav > li > a.btn.btn-rose.dropdown-toggle:hover {
+    background-color: #e91e63 !important;
+    color: #FFFFFF;
+}
+.togglebutton label input[type=checkbox]:checked + .toggle {
+    background-color: rgb(233, 30, 99);
+}
+.table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th {
+    padding: 8px;
+    line-height: 1.42857143;
+    vertical-align: top;
+    border-top: 1px solid #ddd;
+    color: grey;
+}

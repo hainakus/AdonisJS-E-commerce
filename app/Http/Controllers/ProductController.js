@@ -1,27 +1,45 @@
 'use strict'
 const Event = use('Event')
 const User = use('App/Model/User');
+const Profile = use('App/Model/Profile');
 const Product = use('App/Model/Product');
 const Image = use('App/Model/Image');
 const Helpers = use('Helpers');
 const Category = use('App/Model/Category')
 const Wishlist = use('App/Model/Wishlist')
 const Database = use('Database')
+const Color = use('App/Model/Color')
 class ProductController {
     * index (request, response){
-        const products = yield Category.query().with('products').fetch()
-        yield response.sendView('shop', { products: products.toJSON() }) 
+        const color = yield Color.query().with('user').where('user_id', '=', request.currentUser.id)
+        const user = yield User.findOrFail(request.currentUser.id)
+      const profile = yield Profile.query().with('user').where('user_id', '=', user.id).fetch()
+      const products = yield Image.query().with('products').fetch()
+      const categories = yield Category.query().with('products.images').fetch()
+        yield response.sendView('shop', { products: products.toJSON(), profile:profile.toJSON(), categories:categories.toJSON(), color }) 
     }
     * show (request, response){
+         
         const product = yield Product.findOrFail(request.param('id'))
         const images = yield product.images().fetch()
-     const productImages = yield Image.all()
+     const productImages = yield Product.query().with('images').where('id', '=', product.id).fetch()
      const categories = yield Category.all() 
-     const productIs = yield Product.query().has('images').fetch()
+     const productIs = yield Product.query().with('images').fetch()
+    
+     
+     const admin = yield User.find(request.currentUser.id)
+    const isAdmin = yield admin.role().where('role', '=', 'admin').fetch()  
+     
+
+
      const wishlists = yield Wishlist.query('user').where('user_id', '=', request.currentUser.id).fetch()
-         yield response.sendView('product.show', { product: product.toJSON(), images:images.toJSON(),
-              productImages:productImages.toJSON(), productIs:productIs.toJSON(),
-               categories:categories.toJSON(), wishlists:wishlists.toJSON() })
+    
+    
+    yield response.sendView('product.show', {
+         product: product.toJSON(), images:images.toJSON(),
+         productImages:productImages.toJSON(), productIs:productIs.toJSON(),
+         categories:categories.toJSON(), wishlists:wishlists.toJSON(), isAdmin }
+         )
     }
     * create (request, response){
         yield response.sendView('product.create')
@@ -83,7 +101,7 @@ class ProductController {
       const product = yield Product.find(id)
       yield product
   .delete()
-         yield response.redirect('/shop')
+         yield response.redirect('/backend/shop')
     
     }
     * destroyWish(request,response){

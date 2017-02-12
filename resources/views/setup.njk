@@ -1,0 +1,15 @@
+<div class="overlay-color overlay-scale" style="background-color:rgb(93, 93, 93);">
+<button type="button" class="overlay-color-close">Close</button>
+<div class="container" style="top: 10em;
+    position: relative;">
+      {{ form.open({action: 'ProfileController.bkcolor', params: {id: currentUser.id} }) }}
+
+                                    {{ csrfField }}
+                                    <h2> Choose a color for your backend</h2>
+                                    <input name="jscolor" style="background-color:rgb(233, 30, 99);border: none;" id="mycolor" />
+    
+                              {{ form.submit('Pick', 'publish', { class: 'btn btn-primary btn-block btn-rose' }) }}
+                            {{ form.close()}}  
+  </div>
+</div><!-- /.modal -->
+

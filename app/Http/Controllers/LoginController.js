@@ -1,5 +1,5 @@
 'use strict'
-const Validator = use('Validator')
+
 const User = use('App/Model/User')
 class LoginController {
     * index(request, response) {

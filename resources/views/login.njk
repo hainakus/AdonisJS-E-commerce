@@ -1,6 +1,16 @@
 {% extends 'master' %}
 
+{% block styles %}
+{{super()}}
+<style>
+body {
+    //background: url(/assets/01.png);
+    //background-color: #f9f9f9;
+    color: #ffffff;
+}
+</style>
 
+{% endblock %}
 
 {% block content %}
 
@@ -34,7 +44,7 @@
 
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
-                                <button type="submit" class="btn btn-primary">
+                                <button type="submit" class="btn btn-primary btn-block btn-rose">
                                     <i class="fa fa-btn fa-sign-in"></i> Login
                                 </button>
                             </div>

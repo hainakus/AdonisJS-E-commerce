@@ -6,9 +6,9 @@ class Role extends Lucid {
      users () {
     return this.belongsTo('App/Model/User')
   }
-  isAdmin() {
-      
-        this.users().find(1)
+   isAdmin() {
+      var userId = currentUser.id
+        this.users().find(userId)
             if (role.role == 'admin')
             {
                 return true;

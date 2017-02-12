@@ -1,7 +1,10 @@
+
+
 {% set user = currentUser %}
 {% if user %}
 {% yield profile = user.profile().fetch() %}
 {% endif %}
+
 
 <div id="wrapper">
 
@@ -13,29 +16,32 @@
                     
                 </li>
                 {% if not user %}
-                        <li><a href="/login"><i class="fa fa-sign-in"></i><span style="margin-left:10px;">Login</span></a></li>
-                        <li><a href="/register"><i class="fa fa-user"></i><span style="margin-left:10px;">Register</span></a></li>
+                        <li><a href="/login.html"><i class="fa fa-sign-in"></i><span style="margin-left:10px;">Login</span></a></li>
+                        <li><a href="/register.html"><i class="fa fa-user"></i><span style="margin-left:10px;">Register</span></a></li>
                         
                     {% elif user %}
                        <li>
+                       
                             <span><img src="/uploads/{{profile.avatar}}" id="avatar"></span>
 
                         </li>    
-                          <li><a href="/dashboard/{{currentUser.id}}"><i class="fa fa-user"></i><span style="margin-left:10px;">Profile</span></a> </li>
-                                <li><a href="/logout"><i class="fa fa-btn fa-sign-out"></i><span style="margin-left:10px;">Logout</span></a></li>
+                          <li><a href="/backend/dashboard/{{currentUser.id}}.html"><i class="fa fa-user"></i><span style="margin-left:10px;">Profile</span></a> </li>
+                                <li><a href="/logout.html"><i class="fa fa-btn fa-sign-out"></i><span style="margin-left:10px;">Logout</span></a></li>
                            
                                 <li>
-                            <a href="/shop"> <i class="fa fa-shopping-cart " aria-hidden="true"> </i> <span style="margin-left:10px;"> Shop</span> </a>
+                            <a href="/backend/shop"> <i class="fa fa-shopping-cart " aria-hidden="true"> </i> <span style="margin-left:10px;"> Shop</span> </a>
                         </li>
                         {% if user.id === 1 %}
                         <li>
-                            <a href="/users"> <i class="fa fa-puzzle-piece" aria-hidden="true"> </i> <span style="margin-left:10px;"> Client List</span> </a>
+                            <a href="/backend/users.html"> <i class="fa fa-puzzle-piece" aria-hidden="true"> </i> <span style="margin-left:10px;"> Client List</span> </a>
                         </li>
                         {% endif %}
                         <li>
-                            <a href="/posts"> <i class="fa fa-font" aria-hidden="true"> </i> <span style="margin-left:10px;"> Blog </span> </a>
+                            <a href="/backend/posts.html"> <i class="fa fa-font" aria-hidden="true"> </i> <span style="margin-left:10px;"> Blog </span> </a>
                         </li>
-                   
+                        <li>
+                        <a href="#" id="trigger-overlay-color"><i class="fa fa-puzzle-piece" aria-hidden="true"> </i> <span style="margin-left:10px;"> Color Setup</span> </a>
+                        </li>
                                     
                     {% endif %}
                 

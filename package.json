@@ -34,6 +34,7 @@
     "sqlite3": "^3.1.8",
     "standard": "^8.6.0",
     "stripe": "^4.15.0",
+    "vue-route": "^1.5.1",
     "youch": "^2.0.2"
   },
   "standard": {

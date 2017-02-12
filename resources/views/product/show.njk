@@ -1,30 +1,29 @@
 {% extends 'master' %}
-{% set Product = use('App/Model/Product') %}
-{% set Image = use('App/Model/Image') %}
-{% set User = use('App/Model/User') %}
-{% yield user = User.find(currentUser.id) %}
+
 {% block styles %}
-    {{super()}}
-    
-    
+{{super()}}
+<style>
+body {
+    //background: url(/assets/01.png);
+    background-color: {% for item in color %}{% if loop.last %}{{item.rgba}}{% endif %}{% endfor %};
+    color: #ffffff;
+}
+</style>
+
 {% endblock %}
 {% block content %}
 
-{% yield productImage = Product.find(product.id) %}
-
-{% yield image = productImage.images().first() %}
 <div class="container-fluid">
 <div class="row text-left">
 <div class="col-md-10">
     
-    {% yield admin = user.role().fetch() %}
-   
-    {% if admin.role == 'admin' %}
+
+    {% if isAdmin.id == currentUser.id %}
     <a href="#" id="trigger-overlay2">ADD PHOTO</a>
 
 
     {% for image in images %}
-    <a href="/images/{{image.id}}/delete" class="btn btn-rose btn-round">DELETE PHOTO {{image.id}}</a>
+    <a href="/backend/images/{{image.id}}/delete" class="btn btn-rose btn-round">DELETE PHOTO {{image.id}}</a>
    
     {% endfor %}
     {% endif %}
@@ -42,16 +41,16 @@
                 
                 <div class="row" style="top: 5em;position: relative;">
                     <div class="col-md-5 col-sm-12">
-                    <a href="/shop" style="position: absolute;top: 0px;"><i class="fa fa-eercast fa-3x" aria-hidden="true"></i>BACK</a>
-                    {% if admin.role == 'admin' %}
+                
+                   {% if isAdmin.id == currentUser.id %}
                    
                             <a href="#" class="edit2 btn btn-round" id="trigger-overlay">EDIT</a>
-                            <span style="position:relative; top:39rem; color:#e91e63;"><a href="/products/{{product.id}}/delete"><i class="fa fa-trash fa-3x" aria-hidden="true"></i></a></span>
+                            <span style="position:relative; top:39rem; color:#e91e63;"><a href="/backend/products/{{product.id}}/delete"><i class="fa fa-trash fa-3x" aria-hidden="true"></i></a></span>
                     {% endif %}
                   
                     </div>
-                    <div class="col-md-7 col-sm-12" style="background-color:#8a8a8a; color:#FFF;">
-						<h2 class="title" style="color:#FFF;"> {{product.title}}</h2>
+                    <div class="col-md-7 col-sm-12" style="background-color: #ffffff;color: #a9a2a2;">
+						<h2 class="title" style="color: #a9a2a2;"> {{product.title}}</h2>
 						<h3 class="main-price">${{product.price}}</h3> {# get currency filter #}
 						<div id="acordeon">
                             <div class="panel-group" id="accordion">
@@ -133,7 +132,7 @@
                                 {% endif %}
                             </div>
                             <div class="col-md-6 col-sm-6">
-                            <form action="/product/{{product.id}}/addToCart" method="POST">
+                            <form action="/backend/product/{{product.id}}/addToCart" method="POST">
                              {{ csrfField }}
                                 <label>Select quantity</label>
                                 {% set stock = [1,2,3,4,5,6,7,8,9,10] %}
@@ -164,13 +163,12 @@
         
         {% asyncAll  product in productIs %}
         
-            
-               
+           
+               {% set pimage = product.images[0] %}
                  
-                    {% yield p = Product.find(product.id) %}
-                    {% yield pimage = p.images().first() %}
                    
-            <a href="/products/{{product.id}}" class="swiper-slide" style="background-image:url(/uploads/{{pimage.src}})">
+                   
+            <a href="/backend/products/{{product.id}}" class="swiper-slide" style="background-image:url(/uploads/{{pimage.src}})">
             <span class="price-swiper"><i class="fa fa-price"></i>{{product.price}}€</span>
             <p class="title-swiper">{{product.title}}</p>
             
