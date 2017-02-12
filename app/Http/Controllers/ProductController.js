@@ -16,7 +16,9 @@ class ProductController {
       const profile = yield Profile.query().with('user').where('user_id', '=', user.id).fetch()
       const products = yield Image.query().with('products').fetch()
       const categories = yield Category.query().with('products.images').fetch()
-        yield response.sendView('shop', { products: products.toJSON(), profile:profile.toJSON(), categories:categories.toJSON(), color }) 
+       const admin = yield User.find(request.currentUser.id)
+        const isAdmin = yield admin.role().where('role', '=', 'admin').fetch()  
+        yield response.sendView('shop', { products: products.toJSON(), profile:profile.toJSON(), categories:categories.toJSON(), color, isAdmin }) 
     }
     * show (request, response){
          

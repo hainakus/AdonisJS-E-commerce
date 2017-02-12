@@ -17,12 +17,13 @@ body {
     padding-bottom: 100px;" id="product-det">
         
         <div class="container-fluid">
+       {% if isAdmin.id == currentUser.id %}
             <ul class=" text-right">
                 <li><a href="#" class="edit btn  btn-round" id="trigger-overlay">Create Category</a></li>
                 <li> <a href="#" class=" edit btn btn-round" id="trigger-overlay2" style="    top: 5em;
     right: 42px;">Create Product</a></li>
             </ul>
-       
+       {% endif %}
 
           
         <div class="button-group filters-button-group">
