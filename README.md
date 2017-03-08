@@ -29,7 +29,7 @@ Fun
 
 On which website can people test it and give feedback?
 ------------------
-www.cleantektm.com
+cleantektm.com
 user admin : admin@gmail.com
 pass admin : 1123
 
