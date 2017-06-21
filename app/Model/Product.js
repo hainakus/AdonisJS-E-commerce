@@ -8,7 +8,7 @@ class Product extends Lucid {
 
 
     images(){
-       return this.belongsToMany('App/Model/Image')
+       return this.hasMany('App/Model/Image')
     }
     categories(){
        return this.belongsToMany('App/Model/Category')

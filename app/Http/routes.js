@@ -18,12 +18,14 @@
 const Route = use('Route')
 Route.get('/', 'HomeController.index')
 Route.group('api', () => {
-  Route
-    .resource('products', 'APIControllers')
-    .only(['index','show', 'store', 'update', 'destroy'])//.middleware('auth:jwt')
+  Route.get('/users', 'API/UsersController.index')
+  Route.get('/users/:id', 'API/UsersController.show')
+  Route.post('/users/create', 'API/UsersController.doRegister')
+  Route.post('/users/:id/profile', 'API/UsersController.profileCreate')
+  Route.get('/store', 'ShopController.shop')
+  Route.get('/products', 'API/ProductsController.index')  
 })
 .prefix('/api/v1')
-.formats(['json'], true) // all urls needs to have .json extension
 Route.group('login', () => {
 Route.post('/login', 'LoginController.login')
 Route.get('/login', 'LoginController.index')
@@ -36,7 +38,7 @@ Route.group('backend', () => {
 Route.get('/dashboard/:id', 'ProfileController.show').as('profile')
 Route.post('/dashboard/:id', 'ProfileController.store')
 Route.post('/dashboard/:id/edit', 'ProfileController.update')
-Route.get('/shop', 'ProductController.index')
+Route.get('/shop', 'ShopController.index')
 Route.post('/products/:id/wishlists', 'ProductController.addToWishlist')
 Route.get('/products/:id', 'ProductController.show')
 Route.post('/products', 'ProductController.store')

@@ -4,9 +4,13 @@ const Lucid = use('Lucid')
 const Hash = use('Hash')
 
 class User extends Lucid {
+  static get hidden(){
+    return ['password', 'created_at', 'updated_at']
+  }
+
   static get rules () { 
     return {
-      name: 'required',
+      username: 'required',
       email: 'required|email|unique:users',
       password: 'required',
     }

@@ -101,8 +101,10 @@ class ProductController {
       const id = request.param('id');
       
       const product = yield Product.find(id)
-      yield product
-  .delete()
+      yield Database.table('images').where('product_id', id).delete()
+      yield Database.table('carts').where('product_id', id).delete()
+
+      yield product.delete()
          yield response.redirect('/backend/shop')
     
     }

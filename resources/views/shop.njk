@@ -17,14 +17,13 @@ body {
     padding-bottom: 100px;" id="product-det">
         
         <div class="container-fluid">
-       {% if isAdmin.id == currentUser.id %}
+     
             <ul class=" text-right">
                 <li><a href="#" class="edit btn  btn-round" id="trigger-overlay">Create Category</a></li>
                 <li> <a href="#" class=" edit btn btn-round" id="trigger-overlay2" style="    top: 5em;
     right: 42px;">Create Product</a></li>
             </ul>
-       {% endif %}
-
+    
           
         <div class="button-group filters-button-group">
                 <button class="btn btn-raised is-checked active btn-rose" data-filter="*">show all</button>
@@ -42,36 +41,27 @@ body {
     </section>
     
     <section id="product-det">
+      
    <div class="container-fluid">
 	<div class="grid js-masonry">
-   
-     {% for cat in categories %}
-		{% for product in cat.products %}
-		
+        {{products|json}}
+     
+		{% for product in products %}
+
         {% set var = [3, 2, 4] %}
-            {% if product.images[0] == null %}
             
-                    <a href="/backend/products/{{product.id}}">
-                     <div class="grid-item grid-item--width{{var |random}} {{cat.id}}" style="background: url(http://ipsumimage.appspot.com/cga); background-size: cover;">
-                        
-                        <i class="fa fa-circle-o-notch fa-{{var |random}}x" aria-hidden="true"></i>
-                         <h6 class="product-price">{{product.price}}€</h6>
-                     </div>
-                     </a>
-                     {% else %}
-                      
                      <a href="/backend/products/{{product.id}}">
 
-                <div class="grid-item grid-item--width{{var |random}} {{cat.id}}" style="background: url(/uploads/{{product.images[0].src}}); background-size: cover;">
+                <div class="grid-item grid-item--width{{var |random}} {{product.categories[0].id}}" style="background: url(/uploads/{{product.images[0].src}}); background-size: cover;">
                    
                     <i class="fa fa-circle-o-notch fa-{{var |random}}x" aria-hidden="true"></i>
                      <h6 class="product-price">{{product.price}}€</h6>
                 </div>
                      </a>
 
-			{% endif %}
+		
 		{% endfor %}
-        {% endfor %}  
+ 
         </div>
 	</div>
     </section>

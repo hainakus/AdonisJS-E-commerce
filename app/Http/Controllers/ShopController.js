@@ -7,14 +7,22 @@ class ShopController {
   
         * index(request, response){
     const images = yield Database.select('avatar').from('profiles')
-    const products = yield Product.all()
-    const categories = yield Category.all()
-    var user = yield User.findOrFail(request.currentUser.id)
-    const profile = user.profile().fecth()
+    const products = yield Product.with('images', 'categories').fetch()
+    const categories = yield Category.with('products').fetch()
+    //var user = yield User.findOrFail(request.currentUser.id)
+    //const profile = user.profile().fecth()
     //const products = yield Category.query().has('products').fetch()
-    yield response.sendView('shop', {images:images, products:products.toJSON(), categories:categories.toJSON(), profile:profile.toJSON()})
+    yield response.sendView('shop', {products:products.toJSON(), categories:categories.toJSON()})
     }
-    
+     * shop(request, response){
+    const images = yield Database.select('avatar').from('profiles')
+    const products = yield Product.with('images', 'categories').fetch()
+    const categories = yield Category.with('products').fetch()
+    //var user = yield User.findOrFail(request.currentUser.id)
+    //const profile = user.profile().fecth()
+    //const products = yield Category.query().has('products').fetch()
+    yield response.send({ products:products.toJSON()})
+    }
 }
 
 module.exports = ShopController

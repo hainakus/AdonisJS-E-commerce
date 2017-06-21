@@ -9,18 +9,13 @@ class RegisterController {
     }
 
     * doRegister(request, response) {
-    const data = request.only('name', 'email', 'password')
+    const data = request.all()
     const admin = yield User.find(1)
 
        
     
      if (admin){
-       const user = new User()
-        user.username = request.input('name')
-        user.email = request.input('email')
-        user.password = request.input('password')
-        
-        yield user.save()
+        const user = yield User.create(data)
         const role = new Role()
         role.user_id = user.id
         yield role.save(role)

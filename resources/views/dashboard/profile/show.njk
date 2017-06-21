@@ -154,11 +154,15 @@ body {
     </div>
     <div id="collapse3" class="panel-collapse collapse">
       <div class="panel-body">
-
-        
+          <h1> {{user.username}}</h1>
+          <p>{{profile.birthdate}}</p>
+          <p>{{profile.address}}</p>
+          <p>{{profile.email}}</p>
+          <p>{{profile.mobile}}</p>
+          {% if profile === null or profile === '' %}
         {% include 'dashboard.profile.create' %}
       
-       
+          {% endif %}
       </div>
     </div>
   </div>

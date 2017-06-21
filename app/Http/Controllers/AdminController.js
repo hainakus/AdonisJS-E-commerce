@@ -15,6 +15,11 @@ class AdminController {
        
 
     }*/
+    * listUsers (request, response){
+        //const users = yield User.all();
+        const users = yield User.with('profile').fetch()
+        yield response.send( { users: users.toJSON() }) 
+    }
 }
 
 module.exports = AdminController
